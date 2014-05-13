@@ -74,4 +74,4 @@ proguard/
 .vagrant/
 
 # Phalconphp
-web/app/cache/
+web/app/cache/*
