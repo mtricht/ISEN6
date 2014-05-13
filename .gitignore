@@ -70,11 +70,8 @@ proguard/
 #Log Files
 *.log
 
-# Vagrant stuff
-acceptance_config.yml
-boxes/*
-/Vagrantfile
-/.vagrant
-/website/docs/.vagrant
-/website/www/.vagrant
-/vagrant-spec.config.rb
+# Vagrant
+.vagrant/
+
+# Phalconphp
+web/app/cache/
