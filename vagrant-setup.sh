@@ -8,6 +8,7 @@ sudo yum -y install vim httpd mysql mysql-server php55w php55w-opcache php55w-my
 sudo wget https://bootstrap.pypa.io/get-pip.py
 sudo python get-pip.py
 sudo pip install flask
+sudo pip install flask-mysql
 
 # Phalconphp
 sudo git clone --depth=1 git://github.com/phalcon/cphalcon.git
