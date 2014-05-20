@@ -8,5 +8,10 @@ class IndexController extends ControllerBase
     	echo "oi";
     }
 
+     public function getbitpinAction()
+    {
+    	echo "oi2";
+    }
+
 }
 
