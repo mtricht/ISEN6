@@ -34,7 +34,6 @@ def verifyrequest(request):
 	jsonobj.pop('signature')
 
 	uid = jsonobj['data']['account']
-
 	
 	# Grab user entry from keys table
 	account = models.findAccount(uid)
@@ -45,7 +44,6 @@ def verifyrequest(request):
 	
 	# Validate signature of request with OpenSSL
 	key = RSA.importKey(account.public_key)
-	
 
 	requesthash = SHA.new()
 	requesthash.update(json.dumps(jsonobj, separators=(',',':')))

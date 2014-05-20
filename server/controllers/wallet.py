@@ -20,4 +20,3 @@ def index():
 	obj = { 'balance': g.bitrpc.getbalance(fields['account']), \
 			'type': 'bitcoin' }
 	return jsonify(obj)
-

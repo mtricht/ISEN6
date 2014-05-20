@@ -9,6 +9,7 @@ from bitcoinrpc.authproxy import AuthServiceProxy
 
 app = Flask(__name__)
 app.debug = True
+
 # API url
 app.api_url = '/api/v1'
 
@@ -37,6 +38,7 @@ from controllers.dev import dev as development_controller
 # Register all controllers (blueprints) over here
 app.register_blueprint(wallet_controller, url_prefix= app.api_url + '/wallet')
 app.register_blueprint(transaction_controller, url_prefix= app.api_url + '/transaction')
+
 # Test development controller for helper functions like generating keypairs
 app.register_blueprint(development_controller, url_prefix= '/dev')
 

@@ -33,12 +33,6 @@ if [ ! -d "cphalcon" ]; then
 	sudo chmod ugo+x /usr/bin/phalco
 fi
 
-# Start stuff
-sudo chkconfig httpd on
-sudo chkconfig mysqld on
-sudo service mysqld start
-sudo service httpd start
-
 # bitcoind
 sudo rpm -ivh http://tvdw.eu/bitcoin-0.8.1-1.el6.`uname -m`.rpm
 
@@ -47,3 +41,9 @@ sed -i 's/AllowOverride None/AllowOverride All/g' /etc/httpd/conf/httpd.conf
 if [sed -n '$=' /etc/httpd/conf/httpd.conf < 1010]; then
 	echo WSGIScriptAlias /server /var/www/html/server/server.wsgi >> /etc/httpd/conf/httpd.conf
 fi
+
+# Start stuff
+sudo chkconfig httpd on
+sudo chkconfig mysqld on
+sudo service mysqld start
+sudo service httpd start
