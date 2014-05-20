@@ -2,13 +2,15 @@
 
 # Requirements
 sudo rpm -Uvh http://mirror.webtatic.com/yum/el6/latest.rpm
-sudo yum -y install vim httpd mysql mysql-server php55w php55w-opcache php55w-mysql php55w-devel gcc libtool git wget pcre-devel.x86_64 python-devel mysql-devel.x86_64
+sudo yum -y install vim httpd mysql mysql-server php55w php55w-opcache php55w-mysql php55w-devel gcc libtool git wget pcre-devel.x86_64 python-devel mysql-devel.x86_64 mod_wsgi.x86_64
 
 # pip and flask
 sudo wget https://bootstrap.pypa.io/get-pip.py
 sudo python get-pip.py
-sudo pip install flask
-sudo pip install flask-mysql
+sudo pip install flask flask-mysql python-bitcoinrpc simplejson
+sudo wget https://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.6.1.tar.gz
+sudo tar -xzvf pycrypto-2.6.1.tar.gz
+sudo python pycrypto-2.6.1/setup.py install
 
 # Phalconphp
 sudo git clone --depth=1 git://github.com/phalcon/cphalcon.git
@@ -30,5 +32,6 @@ sudo service httpd start
 # bitcoind
 sudo rpm -ivh http://tvdw.eu/bitcoin-0.8.1-1.el6.`uname -m`.rpm
 
-# Sometimes httpd wont start.
-# AllowOverride is enabled in /etc/httpd/conf/httpd.conf
+# AllowOverride has to be disabled in /etc/httpd/conf/httpd.conf
+# For the server add :WSGIScriptAlias /server /var/www/html/server/server.wsgi
+# to the end of /etc/httpd/conf/httpd.conf
