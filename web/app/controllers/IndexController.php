@@ -1,16 +1,26 @@
-99<?php
+<?php
 
 class IndexController extends ControllerBase
 {
 
     public function indexAction()
     {
-    	echo "oi";
+    	$this->view->setVar("title", "Home");
     }
 
-     public function getbitpinAction()
+    public function signupAction()
     {
-    	echo "oi2";
+    	
+    }
+
+    public function loginAction()
+    {
+    	
+    }
+
+    public function featuresAction()
+    {
+    	
     }
 
 }

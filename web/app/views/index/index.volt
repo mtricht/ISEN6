@@ -15,7 +15,7 @@
 							Easily transfer funds to other bitPin cards or crypto addresses!
 						</h3>
 						<!-- Slide Image -->
-						<img class="slide-img" src="img/homepage-slider/slide1.png" alt="Slide 1" />
+						{{ image('img/homepage-slider/slide1.png', 'class': 'slide-img') }}
 					</li>
 					<!-- End Slide 1 -->
 				</ul>
@@ -28,7 +28,7 @@
 	    	<div class="container">
 				<div class="row">
 					<div class="col-md-12 col-sm-18 text-center">
-						<a href="#" class="btn get-bitpin">Get bitPin now!</a>
+						{{ link_to('signup', 'Get bitPin now!', 'class': 'btn get-bitpin') }}
 					</div>
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 		        			<img src="img/service-icon/diamond.png" alt="Service 1">
 		        			<h3>Easy to use</h3>
 		        			<p>With easy access to our web and mobile application, nothing can stop you from spending your money.</p>
-		        			<a href="#" class="btn">Read more</a>
+		        			{{ link_to('features', 'Read more', 'class': 'btn') }}
 		        		</div>
 	        		</div>
 	        		<div class="col-md-4 col-sm-6">
@@ -52,7 +52,7 @@
 		        			<img src="img/service-icon/ruler.png" alt="Service 2">
 		        			<h3>Safe & Secure</h3>
 		        			<p>Your bitPin is secured with an RSA certificate so nobody can come between you and our servers.</p>
-		        			<a href="#" class="btn">Read more</a>
+		        			{{ link_to('features', 'Read more', 'class': 'btn') }}
 		        		</div>
 	        		</div>
 	        		<div class="col-md-4 col-sm-6">
@@ -60,7 +60,7 @@
 		        			<img src="img/service-icon/box.png" alt="Service 3">
 		        			<h3>Completely anonymous</h3>
 		        			<p>We will store no information about your transaction history unless you tell us to. Not even the NSA will know what you bought.</p>
-		        			<a href="#" class="btn">Read more</a>
+		        			{{ link_to('features', 'Read more', 'class': 'btn') }}
 		        		</div>
 	        		</div>
 	        	</div>

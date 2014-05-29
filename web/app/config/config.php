@@ -17,8 +17,11 @@ return new \Phalcon\Config(array(
         'cacheDir'       => __DIR__ . '/../../app/cache/',
         'listenersDir'       => __DIR__ . '/../../app/listeners/',
         'baseUri'        => '/web/',
+        'compileAlways'  => true, // Set to true for development enviroment.
     ),
     'root_routes' => array(
-        "getbitpin" => "index",
+        "signup" => "index",
+        "login" => "index",
+        "features" => "index",
     ),
 ));
