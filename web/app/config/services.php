@@ -79,3 +79,9 @@ $di->set('session', function () {
 
     return $session;
 });
+
+$di->set('forms', function () {
+    $formsManager = new Phalcon\Forms\Manager();
+    $formsManager->set('signup', new SignupForm());
+    return $formsManager;
+});

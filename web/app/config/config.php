@@ -16,6 +16,7 @@ return new \Phalcon\Config(array(
         'libraryDir'     => __DIR__ . '/../../app/library/',
         'cacheDir'       => __DIR__ . '/../../app/cache/',
         'listenersDir'       => __DIR__ . '/../../app/listeners/',
+        'formsDir'       => __DIR__ . '/../../app/forms/',
         'baseUri'        => '/web/',
         'compileAlways'  => true, // Set to true for development enviroment.
     ),
