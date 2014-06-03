@@ -8,7 +8,6 @@
 					<li class="active">{{ link_to('', 'Home') }}</li>
 					<li>{{ link_to('features', 'Features') }}</li>
 					<li>{{ link_to('login', 'Login') }}</li>
-		        	<li>{{ link_to('signup', 'Get bitPin now!') }}</li>
 				</ul>
 			</nav>
 		</div>

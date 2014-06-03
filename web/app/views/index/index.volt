@@ -28,7 +28,7 @@
 	    	<div class="container">
 				<div class="row">
 					<div class="col-md-12 col-sm-18 text-center">
-						{{ link_to('signup', 'Get bitPin now!', 'class': 'btn get-bitpin') }}
+						{{ link_to('signup', 'Get bitPin now for only €10.', 'class': 'btn get-bitpin') }}
 					</div>
 				</div>
 			</div>
