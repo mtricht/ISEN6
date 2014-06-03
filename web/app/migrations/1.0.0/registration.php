@@ -75,14 +75,6 @@ class RegistrationMigration_100 extends Migration
                 new Index('PRIMARY', array('id')),
                 new Index('fk_payment_method_idx', array('payment_method'))
             ),
-            'references' => array(
-                new Reference('fk_payment_method', array(
-                    'referencedSchema' => 'test',
-                    'referencedTable' => 'payment_method',
-                    'columns' => array('payment_method'),
-                    'referencedColumns' => array('id')
-                ))
-            ),
             'options' => array(
                 'TABLE_TYPE' => 'BASE TABLE',
                 'AUTO_INCREMENT' => '1',

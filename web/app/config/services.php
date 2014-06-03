@@ -80,6 +80,9 @@ $di->set('session', function () {
     return $session;
 });
 
+/**
+ * Load the forms used throughout the application.
+ */
 $di->set('forms', function () {
     $formsManager = new Phalcon\Forms\Manager();
     $formsManager->set('signup', new SignupForm());

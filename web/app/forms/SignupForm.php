@@ -16,7 +16,7 @@ class SignupForm extends BootstrapForm
         $this->setEntity($this);
 
         // Street field.
-        $street = new Text('street');
+        $street = new Text('address_street');
         $street->setLabel('Street *');
         // Street is required.
         $street->addValidator(new PresenceOf(array(
@@ -25,7 +25,7 @@ class SignupForm extends BootstrapForm
         $this->add($street);
 
         // House number field.
-        $houseNumber = new Text('houseNumber');
+        $houseNumber = new Text('address_number');
         $houseNumber->setLabel('House Number *');
         // House number field may not be empty.
         $houseNumber->addValidator(new PresenceOf(array(
@@ -39,7 +39,7 @@ class SignupForm extends BootstrapForm
         $this->add($houseNumber);
 
         // Postal code field.
-        $postalCode = new Text('postalCode');
+        $postalCode = new Text('postal_code');
         $postalCode->setLabel('Postal Code *');
         // Postal code field may not be empty.
         $postalCode->addValidator(new PresenceOf(array(
@@ -62,7 +62,7 @@ class SignupForm extends BootstrapForm
         $this->add($email);
 
         // Payment method field.
-        $paymentMethod = new Select("paymentMethod", array(
+        $paymentMethod = new Select("payment_method", array(
             '' => 'Select payment method.',
             'ideal' => 'ideal',
             'acceptgiro' => 'Acceptgiro',

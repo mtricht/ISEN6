@@ -19,10 +19,12 @@ class IndexController extends ControllerBase
             // Save everything submitted!
             if ($this->forms->get('signup')->isValid($_POST)) {
                 // TO-DO: In production redirect user to the selected payment method.
-                //$user = new User();
-                //$user->save($_POST);
-                $response = new Response();
-                return $response->redirect('login');
+                $registration = new Registration();
+                if ($registration->save($_POST)) {
+                    // Redirect if everything went well saving it.
+                    $response = new Response();
+                    return $response->redirect('login');
+                }
             }
             // Else let the view and form handle the rest.
         }
