@@ -11,14 +11,20 @@ class BootstrapForm extends Form
     {
         $element = $this->get($name);
 
-        // Validation messages.
+        // Validation error messages.
         $messages = $this->getMessagesFor($element->getName());
 
-        // TODO: display errors messages in a tooltip.
-
-        $decoratedInput = '<div class="form-group">';
+        $decoratedInput = '<div class="form-group' . (count($messages)
+            ? ' has-error'
+            : ''
+            ) . '">';
         $decoratedInput .= '<label for="' . $element->getName() . '">' . $element->getLabel() . '</label>';
         $element->setAttribute('class', 'form-control');
+        // Display first error message.
+        if (count($messages)) {
+            $element->setAttribute('data-toggle', 'tooltip');
+            $element->setAttribute('title', $messages[0]);
+        }
         $decoratedInput .= $element;
         $decoratedInput .= '</div>';
 

@@ -1,5 +1,7 @@
 <?php
 
+use Phalcon\Http\Response;
+
 class IndexController extends ControllerBase
 {
 
@@ -11,6 +13,19 @@ class IndexController extends ControllerBase
     public function signupAction()
     {
     	$this->view->setVar("title", "Sign up");
+
+        // Run validation if we're posting.
+        if ($_POST) {
+            // Save everything submitted!
+            if ($this->forms->get('signup')->isValid($_POST)) {
+                // TO-DO: In production redirect user to the selected payment method.
+                //$user = new User();
+                //$user->save($_POST);
+                $response = new Response();
+                return $response->redirect('login');
+            }
+            // Else let the view and form handle the rest.
+        }
     }
 
     public function loginAction()
