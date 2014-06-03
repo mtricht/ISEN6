@@ -7,7 +7,7 @@
         			<img src="img/service-icon/diamond.png" alt="Service 1">
         			<h3>Create new bitPin</h3>
         			<p>Create a new bitPin card and generate a letter to send to the user.</p>
-        			{{ link_to('features', 'Create', 'class': 'btn') }}
+        			{{ link_to('admin/createbitpin', 'Create', 'class': 'btn') }}
         		</div>
     		</div>
     		<div class="col-md-4 col-sm-6">

@@ -18,7 +18,10 @@
         {{ stylesheet_link('css/leaflet.css') }}
 		<!--[if lte IE 8]> {{ stylesheet_link('css/leaflet.ie.css') }} <![endif]-->
 		{{ stylesheet_link('css/main-orange.css') }}
+
 		{{ javascript_include('js/modernizr/modernizr-2.6.2-respond-1.1.0.min.js') }}
+
+        {{ assets.outputCss() }}
 	</head>
 	<body>
 		<!--[if lt IE 7]>

@@ -9,5 +9,11 @@ class AdminController extends ControllerBase
     {
     	$this->view->setVar("title", "Admin Panel");
     }
+
+    public function createbitpinAction()
+    {
+        $this->assets->addCss('css/print.css');
+        $this->view->setVar("title", "Admin Panel");
+    }
 }
 
