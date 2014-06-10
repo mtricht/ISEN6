@@ -36,7 +36,7 @@ public class ACR122UA9Adapter extends RfidAdapter {
 
     public byte[] writeBlock(byte block, byte[] message) {
         byte[] prefix = new byte[]{(byte) 0xFF, (byte) 0xD6, (byte) 0x00,
-            block, (byte) 0x16};
+            block, (byte) 0x10};
         // Merge byte[] prefix and byte[] message
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
         try {
@@ -49,7 +49,7 @@ public class ACR122UA9Adapter extends RfidAdapter {
     }
     
     public byte[] readBlock(byte block) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

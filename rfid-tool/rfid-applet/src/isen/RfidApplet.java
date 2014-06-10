@@ -57,6 +57,7 @@ public class RfidApplet extends Applet implements ActionListener {
 
     public void done(String uuid) {
     	try {
+    		// TODO: Change URL.
     		getAppletContext().showDocument(new URL("http://www.google.com/?uuid=" + uuid));
 	   }
 	   catch (MalformedURLException ex) {

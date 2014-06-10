@@ -5,9 +5,15 @@ package isen;
  * @author Michael
  */
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+
 import javax.smartcardio.*;
+
+import sun.misc.BASE64Decoder;
+
+import com.sun.xml.internal.messaging.saaj.util.Base64;
 
 public class RfidTool extends Thread {
     
@@ -72,7 +78,27 @@ public class RfidTool extends Thread {
                     channel.transmit(command);
                     
                     // See how many blocks we need to use.
-                    
+                    BASE64Decoder decoder = new BASE64Decoder();
+                    byte[] key = decoder.decodeBuffer(rfidApplet.getParameter("key"));
+                    int blocksNeeded = (int) key.length/16;
+                    if ((key.length % 16) > 0)
+                    	blocksNeeded += 1;
+
+                    // Write the key away.
+                    for (int i = 0; i < blocksNeeded; i++) {
+                    	byte[] message = new byte[16];
+                    	int y = 0;
+                    	for (int x = (i * 16); x < ((i * 16) + 16); x++) {
+                    		if (x >= key.length) {
+                    			message[y] = (byte) 0x00;
+                    		} else {
+                    			message[y] = key[x];
+                    		}
+                    		y++;
+                    	}
+                    	command = new CommandAPDU(rfidApplet.rfidAdapter.writeBlock((byte) i, message));
+                    	channel.transmit(command);
+                    }
                     
                     // We're done!
                     rfidApplet.done(uuid);
@@ -80,7 +106,7 @@ public class RfidTool extends Thread {
                 }
                 
                 Thread.sleep(1000);
-            } catch (CardException|InterruptedException ex) {
+            } catch (CardException|InterruptedException|IOException ex) {
                 ex.printStackTrace();
             }
         }
