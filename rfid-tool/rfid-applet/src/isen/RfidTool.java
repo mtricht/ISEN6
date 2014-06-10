@@ -84,6 +84,8 @@ public class RfidTool extends Thread {
                     if ((key.length % 16) > 0)
                     	blocksNeeded += 1;
 
+                    // We start at block 1. Block 0 is the manufacture block.
+                    int currentBlock = 1;
                     // Write the key away.
                     for (int i = 0; i < blocksNeeded; i++) {
                     	byte[] message = new byte[16];
@@ -96,15 +98,18 @@ public class RfidTool extends Thread {
                     		}
                     		y++;
                     	}
-                    	command = new CommandAPDU(rfidApplet.rfidAdapter.authenticateBlock((byte) 20));
+                    	// Every 4 blocks is a trail block and we should NOT write it and thus skip it.
+                    	if (((currentBlock + 1) % 4) == 0)
+                    		currentBlock++;
+                    	command = new CommandAPDU(rfidApplet.rfidAdapter.authenticateBlock((byte) currentBlock));
                     	response = channel.transmit(command);
                     	byteArray = response.getBytes();
                     	System.out.println( bytesToHex( byteArray ) );
-                    	command = new CommandAPDU(rfidApplet.rfidAdapter.writeBlock((byte) 20, message));
+                    	command = new CommandAPDU(rfidApplet.rfidAdapter.writeBlock((byte) currentBlock, message));
                     	response = channel.transmit(command);
                     	byteArray = response.getBytes();
                     	System.out.println( bytesToHex( byteArray ) );
-                    	System.exit(0);
+                    	currentBlock++;
                     }
                     
                     // We're done!
