@@ -96,8 +96,15 @@ public class RfidTool extends Thread {
                     		}
                     		y++;
                     	}
-                    	command = new CommandAPDU(rfidApplet.rfidAdapter.writeBlock((byte) i, message));
-                    	channel.transmit(command);
+                    	command = new CommandAPDU(rfidApplet.rfidAdapter.authenticateBlock((byte) 20));
+                    	response = channel.transmit(command);
+                    	byteArray = response.getBytes();
+                    	System.out.println( bytesToHex( byteArray ) );
+                    	command = new CommandAPDU(rfidApplet.rfidAdapter.writeBlock((byte) 20, message));
+                    	response = channel.transmit(command);
+                    	byteArray = response.getBytes();
+                    	System.out.println( bytesToHex( byteArray ) );
+                    	System.exit(0);
                     }
                     
                     // We're done!
