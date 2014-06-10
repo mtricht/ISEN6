@@ -5,10 +5,10 @@ package isen;
  * @author Michael
  */
 
-import RfidReader.*;
-import java.applet.*;
+import java.applet.Applet;
 import java.awt.Button;
 import java.awt.event.*;
+import rfidreader.*;
 
 public class RfidTool extends Applet implements ActionListener {
     

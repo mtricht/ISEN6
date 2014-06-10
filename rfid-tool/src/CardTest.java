@@ -37,10 +37,28 @@ public class CardTest {
         Card card = terminal.connect("*");
         CardChannel channel = card.getBasicChannel();
  
-        CommandAPDU command = new CommandAPDU(new byte[]{(byte)0xFF,(byte)0xB0,(byte)0x00,(byte)0x04,(byte)0x10});
+        // load key
+        CommandAPDU command = new CommandAPDU(new byte[]{(byte) 0xFF, (byte) 0x82, (byte) 0x00,
+                                      (byte) 0x00, (byte) 0x06, (byte) 0xFF,
+                                     (byte) 0xFF, (byte) 0xFF, (byte) 0xFF,
+                                     (byte) 0xFF, (byte) 0xFF});
         ResponseAPDU response = channel.transmit(command);
- 
         byte[] byteArray = response.getBytes();
+        System.out.println( bytesToHex( byteArray ) );
+        
+        // authenticate
+        command = new CommandAPDU(new byte[]{(byte) 0xFF, (byte) 0x86, (byte) 0x00,
+                                      (byte) 0x00, (byte) 0x05, (byte) 0x01,(byte)0x00,(byte)0x00,(byte)0x60,(byte)0x00});
+        response = channel.transmit(command);
+        byteArray = response.getBytes();
+        System.out.println( bytesToHex( byteArray ) );
+        
+        // read
+        command = new CommandAPDU(new byte[]{
+            (byte)0xFF,(byte)0xB0,(byte)0x00,(byte)0x01,(byte)0x10
+        });
+        response = channel.transmit(command);
+        byteArray = response.getBytes();
         System.out.println( bytesToHex( byteArray ) );
         Thread.sleep(1000);
       } catch (CardException e) {
