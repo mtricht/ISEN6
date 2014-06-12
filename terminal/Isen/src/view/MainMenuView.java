@@ -20,7 +20,7 @@ public class MainMenuView extends JFrame implements ActionListener{
 		
 		setVisible(true);
 		
-		setLayout(new GridLayout(2,1));
+		setLayout(new GridLayout(1,2));
 		
 		betaling = new JButton("Betaling");
 		instellingen = new JButton("Instellingen");
