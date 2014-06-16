@@ -1,13 +1,11 @@
 package view;
 
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class MainMenuView extends JFrame implements ActionListener{
 	
@@ -30,8 +28,8 @@ public class MainMenuView extends JFrame implements ActionListener{
 		instellingen.addActionListener(this);
 		
 	
-		betaling.setBounds(100,100,100,20);
-		instellingen.setBounds(50,50,100,20);
+		betaling.setBounds(100,50,100,50);
+		instellingen.setBounds(100,100,100,50);
 		
 		add(betaling);
 		add(instellingen);
