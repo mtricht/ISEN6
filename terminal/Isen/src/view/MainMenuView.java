@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,13 +21,17 @@ public class MainMenuView extends JFrame implements ActionListener{
 		
 		setVisible(true);
 		
-		setLayout(new GridLayout(1,2));
+		setLayout(null);
 		
 		betaling = new JButton("Betaling");
 		instellingen = new JButton("Instellingen");
 
 		betaling.addActionListener(this);
 		instellingen.addActionListener(this);
+		
+	
+		betaling.setBounds(100,100,100,20);
+		instellingen.setBounds(50,50,100,20);
 		
 		add(betaling);
 		add(instellingen);
