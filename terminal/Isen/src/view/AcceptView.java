@@ -1,15 +1,19 @@
 package view;
 
+
+
 import javax.swing.JFrame;
 
-public class SettingsView extends JFrame
-{
-	public SettingsView()
+public class AcceptView extends JFrame{
+	
+	public AcceptView()
 	{
+		
 		setVisible(true);
 		setSize(320,240);
-		setTitle("Instellingen");
+		setTitle("Acceptatie");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+
 }

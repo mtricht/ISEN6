@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 
 public class PriceView extends JFrame implements ActionListener{
 	
-	JButton one,two,three,four,five,six,seven,eight,nine,zero,comma,backspace,menu;
+	JButton one,two,three,four,five,six,seven,eight,nine,zero,comma,backspace,menu,betalen;
 	String bedrag = "";
 	JTextField bedragDisplay;
 	
@@ -24,7 +24,7 @@ public class PriceView extends JFrame implements ActionListener{
 		setTitle("Prijs invoeren");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new GridLayout(4,2));
+		setLayout(new GridLayout(5,2));
 		
 		one = new JButton("1");
 		two = new JButton("2");
@@ -38,8 +38,9 @@ public class PriceView extends JFrame implements ActionListener{
 		zero = new JButton("0");
 		comma = new JButton(",");
 		bedragDisplay = new JTextField("");
-		backspace = new JButton("<--");
+		backspace = new JButton("Delete");
 		menu = new JButton("Menu");
+		betalen = new JButton("Betalen");
 		
 		one.addActionListener(this);
 		two.addActionListener(this);
@@ -54,8 +55,8 @@ public class PriceView extends JFrame implements ActionListener{
 		comma.addActionListener(this);
 		backspace.addActionListener(this);
 		menu.addActionListener(this);
+		betalen.addActionListener(this);
 		
-		add(bedragDisplay);
 		add(one);
 		add(two);
 		add(three);
@@ -65,10 +66,12 @@ public class PriceView extends JFrame implements ActionListener{
 		add(seven);
 		add(eight);
 		add(nine);
-		add(zero);
 		add(comma);
+		add(zero);
 		add(backspace);
 		add(menu);
+		add(bedragDisplay);
+		add(betalen);
 	}
 	
 	@Override
@@ -127,7 +130,13 @@ public class PriceView extends JFrame implements ActionListener{
 		}
 		if(e.getSource() == menu)
 		{
+			setVisible(false);
 			new MainMenuView();
+		}
+		if(e.getSource() == betalen)
+		{
+			setVisible(false);
+			new BetalenView();
 		}
 		bedragDisplay.setText(bedrag);
 	}
