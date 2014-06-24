@@ -6,13 +6,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class BetalenView extends JFrame implements ActionListener{
-	JButton one,two,three,four,five,a,b,c,d,e,menu,backspace,accept,empty;
-	JTextField pinVeld;
-	String passwordVeld = new String("");
-	String password = new String("");
+	JButton one, two, three, four, five,
+		a, b, c, d, e, menu, backspace,
+		accept, empty;
+	JPasswordField pinVeld;
 	
 	public BetalenView()
 	{
@@ -37,7 +38,7 @@ public class BetalenView extends JFrame implements ActionListener{
 		menu = new JButton("Menu");
 		backspace = new JButton("Delete");
 		accept = new JButton("Accept");
-		pinVeld = new JTextField("");
+		pinVeld = new JPasswordField("");
 		empty = new JButton("");
 		
 		one.addActionListener(this);
@@ -73,58 +74,9 @@ public class BetalenView extends JFrame implements ActionListener{
 		
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == one)
-		{
-			passwordVeld += "*";
-			password += "1";
-		}
-		if(e.getSource() == two)
-		{
-			passwordVeld += "*";
-			password += "2";
-		}
-		if(e.getSource() == three)
-		{
-			passwordVeld += "*";
-			password += "3";
-		}
-		if(e.getSource() == four)
-		{
-			passwordVeld += "*";
-			password += "4";
-		}
-		if(e.getSource() == five)
-		{
-			passwordVeld += "*";
-			password += "5";
-		}
-		if(e.getSource() == a)
-		{
-			passwordVeld += "*";
-			password += "a";
-		}
-		if(e.getSource() == b)
-		{
-			passwordVeld += "*";
-			password += "b";
-		}
-		if(e.getSource() == c)
-		{
-			passwordVeld += "*";
-			password += "c";
-		}
-		if(e.getSource() == d)
-		{
-			passwordVeld += "*";
-			password += "d";
-		}
-		if(e.getSource() == e)
-		{
-			passwordVeld += "*";
-			password += "e";
-		}
+		String password = String.valueOf(pinVeld.getPassword());
+		pinVeld.setText(password + ((JButton) e.getSource()).getText());
 		if(e.getSource() == menu)
 		{
 			setVisible(false);
@@ -134,8 +86,7 @@ public class BetalenView extends JFrame implements ActionListener{
 		{
 			try
 			{
-				passwordVeld = passwordVeld.substring(0, passwordVeld.length()-1);
-				password = password.substring(0, passwordVeld.length()-1);
+				pinVeld.setText(password.substring(0, password.length()-1));
 			}
 			catch(StringIndexOutOfBoundsException f){}
 		}
@@ -144,8 +95,6 @@ public class BetalenView extends JFrame implements ActionListener{
 			setVisible(false);
 			new AcceptView();	
 		}
-		pinVeld.setText(passwordVeld);
-		System.out.println(password);
 	}
 	
 	
