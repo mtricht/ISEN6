@@ -9,22 +9,25 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import properties.ReadProperties;
+
 public class PriceView extends JFrame implements ActionListener{
 	
 	JButton one, two, three, four, five,
 			six, seven, eight, nine, zero, comma, backspace, menu, betalen;
 	String bedrag = "";
 	JTextField bedragDisplay;
+	ReadProperties readProperties = new ReadProperties();
 	
 	
 	public PriceView()
 	{
-		setVisible(true);
+		
 		
 		setSize(320, 240);
 		setTitle("Prijs invoeren");
-		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setLayout(new GridLayout(5, 2));
 		
 		one = new JButton("1");
@@ -73,6 +76,16 @@ public class PriceView extends JFrame implements ActionListener{
 		add(menu);
 		add(bedragDisplay);
 		add(betalen);
+		setVisible(true);
+	}
+	
+	public void gotoInstellingen()
+	{
+		if(bedragDisplay.getText().equals( readProperties.getPropertiesPin()))
+		{
+			setVisible(false);
+			new SettingsView();
+		}
 	}
 	
 	@Override
@@ -96,7 +109,7 @@ public class PriceView extends JFrame implements ActionListener{
 		{
 			setVisible(false);
 			new BetalenView();
-		}/*
-		bedragDisplay.setText(bedrag);*/
+		}
+		gotoInstellingen();
 	}
 }

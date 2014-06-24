@@ -12,8 +12,9 @@ class AdminController extends ControllerBase
 
     public function createbitpinAction()
     {
-        $this->assets->addCss('css/print.css');
-        $this->view->setVar("title", "Admin Panel");
+        //$this->assets->addCss('css/print.css');
+        $this->view->setVar("title", "Registrations");
+        $this->view->setVar("registrations", Registration::find());
         /*$config = array(
 	        "digest_alg" => "sha512",
 	        "private_key_bits" => 1536,
@@ -35,6 +36,16 @@ class AdminController extends ControllerBase
 		   return $der;
 		}
 		pem2der($p);*/
+    }
+
+    public function acceptAction($id = 0)
+    {
+    	if ($id == 0 || count($registration = Registration::find($id)) == 0) {
+    		$response = new Response();
+    		return $response->redirect('admin/createbitpin');
+    	}
+    	$this->view->setVar("title", "Accept Registration");
+    	$this->view->setVar("registration", $registration);
     }
 }
 
