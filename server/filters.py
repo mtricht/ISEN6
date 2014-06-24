@@ -5,6 +5,7 @@ from Crypto import Random
 from Crypto.Hash import SHA
 from Crypto.Signature import PKCS1_v1_5
 import base64, json, string, models
+from libraries.jsonh import json_error
 
 def required_params(request, *required_params):
 	fields = json.loads(request.data)
@@ -15,8 +16,6 @@ def required_params(request, *required_params):
 			return False
 	return True
 
-def json_error(message, code):
-	return json.loads('{"error":{"message":"' + message + '","code":' + str(code) + '}}')
 
 def verifyrequest(request):
 	# Are we posting?

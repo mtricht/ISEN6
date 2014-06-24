@@ -5,7 +5,7 @@ use Phalcon\Db\Index;
 use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
-class RegistrationMigration_101 extends Migration
+class RegistrationMigration_102 extends Migration
 {
 
     public function up()
@@ -71,7 +71,7 @@ class RegistrationMigration_101 extends Migration
                 )
             ),
             'indexes' => array(
-                new Index('PRIMARY', array('id')),
+                new Index('PRIMARY', array('id'))
             ),
             'options' => array(
                 'TABLE_TYPE' => 'BASE TABLE',

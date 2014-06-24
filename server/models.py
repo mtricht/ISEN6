@@ -3,7 +3,7 @@ from flaskext.mysql import MySQL
 
 def findAccount(account_id):
 	db = g.db.cursor()
-	db.execute('SELECT * FROM `keys` WHERE `uid` = %s LIMIT 1', account_id)
+	db.execute('SELECT * FROM `keys` WHERE `rsa_id` = %s LIMIT 1', [account_id])
 	result = db.fetchone()
 	if result is None:
 		return None
