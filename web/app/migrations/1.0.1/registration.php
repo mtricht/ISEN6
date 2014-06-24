@@ -5,7 +5,7 @@ use Phalcon\Db\Index;
 use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
-class RegistrationMigration_100 extends Migration
+class RegistrationMigration_101 extends Migration
 {
 
     public function up()
@@ -63,17 +63,15 @@ class RegistrationMigration_100 extends Migration
                 new Column(
                     'payment_method',
                     array(
-                        'type' => Column::TYPE_INTEGER,
-                        'unsigned' => true,
+                        'type' => Column::TYPE_VARCHAR,
                         'notNull' => true,
-                        'size' => 4,
+                        'size' => 50,
                         'after' => 'postal_code'
                     )
                 )
             ),
             'indexes' => array(
                 new Index('PRIMARY', array('id')),
-                new Index('fk_payment_method_idx', array('payment_method'))
             ),
             'options' => array(
                 'TABLE_TYPE' => 'BASE TABLE',

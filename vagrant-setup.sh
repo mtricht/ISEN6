@@ -26,6 +26,10 @@ if [ ! -d "cphalcon" ]; then
 	cd cphalcon/build
 	sudo ./install
 	sudo echo 'extension=phalcon.so' > /etc/php.d/phalcon.ini
+fi
+
+# Phalconphp dev tools
+if [ ! -d "phalcon-devtools" ]; then
 	sudo git clone git://github.com/phalcon/phalcon-devtools.git
 	cd phalcon-devtools/
 	sudo ./phalcon.sh
@@ -36,11 +40,11 @@ fi
 # bitcoind
 sudo rpm -ivh http://tvdw.eu/bitcoin-0.8.1-1.el6.`uname -m`.rpm
 
-sed -i 's/AllowOverride None/AllowOverride All/g' /etc/httpd/conf/httpd.conf
-sed -i 's/#EnableSendfile off/EnableSendfile off/g' /etc/httpd/conf/httpd.conf
+sudo sed -i 's/AllowOverride None/AllowOverride All/g' /etc/httpd/conf/httpd.conf
+sudo sed -i 's/#EnableSendfile off/EnableSendfile off/g' /etc/httpd/conf/httpd.conf
 
 if [sed -n '$=' /etc/httpd/conf/httpd.conf < 1010]; then
-	echo WSGIScriptAlias /server /var/www/html/server/server.wsgi >> /etc/httpd/conf/httpd.conf
+	sudo echo WSGIScriptAlias /server /var/www/html/server/server.wsgi >> /etc/httpd/conf/httpd.conf
 fi
 
 # Start stuff
