@@ -26,6 +26,10 @@ if [ ! -d "cphalcon" ]; then
 	cd cphalcon/build
 	sudo ./install
 	sudo echo 'extension=phalcon.so' > /etc/php.d/phalcon.ini
+fi
+
+# Phalconphp dev tools
+if [ ! -d "phalcon-devtools" ]; then
 	sudo git clone git://github.com/phalcon/phalcon-devtools.git
 	cd phalcon-devtools/
 	sudo ./phalcon.sh
