@@ -1,4 +1,3 @@
-<!-- Services -->
 <div class="section">
     <div class="container">
     	<div class="row">
@@ -30,4 +29,3 @@
     </div>
     <div style="min-height:300px"></div>
 </div>
-<!-- End Services -->

@@ -21,8 +21,8 @@ return new \Phalcon\Config(array(
         'compileAlways'  => true, // Set to true for development enviroment.
     ),
     'root_routes' => array(
-        "signup" => "index",
-        "login" => "index",
-        "features" => "index",
-    ),
+        'signup' => 'index',
+        'login' => 'index',
+        'features' => 'index',
+    )
 ));

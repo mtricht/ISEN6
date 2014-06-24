@@ -13,8 +13,6 @@ import javax.smartcardio.*;
 
 import sun.misc.BASE64Decoder;
 
-import com.sun.xml.internal.messaging.saaj.util.Base64;
-
 public class RfidTool extends Thread {
     
     final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();

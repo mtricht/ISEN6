@@ -5,7 +5,7 @@ use Phalcon\Db\Index;
 use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
-class KeysMigration_102 extends Migration
+class KeysMigration_101 extends Migration
 {
 
     public function up()

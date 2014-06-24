@@ -39,6 +39,7 @@ public class RfidApplet extends Applet implements ActionListener {
 		if (this.getParameter("key") == null) {
 			statusButton.setLabel("Missing key parameter.");
 		}
+		
     }
     
     public void start() {
@@ -58,7 +59,7 @@ public class RfidApplet extends Applet implements ActionListener {
     public void done(String uuid) {
     	try {
     		// TODO: Change URL.
-    		getAppletContext().showDocument(new URL("http://www.google.com/?uuid=" + uuid));
+    		getAppletContext().showDocument(new URL(getCodeBase() + "?uuid=" + uuid));
 	   }
 	   catch (MalformedURLException ex) {
 	    	ex.getMessage();
