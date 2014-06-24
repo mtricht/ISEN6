@@ -49,7 +49,8 @@ public class ACR122UA9Adapter extends RfidAdapter {
     }
     
     public byte[] readBlock(byte block) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new byte[]{(byte) 0xFF, (byte) 0xB0, (byte) 0x00,
+            block, (byte) 0x10};
     }
     
 }
