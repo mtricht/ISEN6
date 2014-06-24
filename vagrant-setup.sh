@@ -36,11 +36,11 @@ fi
 # bitcoind
 sudo rpm -ivh http://tvdw.eu/bitcoin-0.8.1-1.el6.`uname -m`.rpm
 
-sed -i 's/AllowOverride None/AllowOverride All/g' /etc/httpd/conf/httpd.conf
-sed -i 's/#EnableSendfile off/EnableSendfile off/g' /etc/httpd/conf/httpd.conf
+sudo sed -i 's/AllowOverride None/AllowOverride All/g' /etc/httpd/conf/httpd.conf
+sudo sed -i 's/#EnableSendfile off/EnableSendfile off/g' /etc/httpd/conf/httpd.conf
 
 if [sed -n '$=' /etc/httpd/conf/httpd.conf < 1010]; then
-	echo WSGIScriptAlias /server /var/www/html/server/server.wsgi >> /etc/httpd/conf/httpd.conf
+	sudo echo WSGIScriptAlias /server /var/www/html/server/server.wsgi >> /etc/httpd/conf/httpd.conf
 fi
 
 # Start stuff
