@@ -11,7 +11,8 @@ import javax.swing.JTextField;
 
 public class PriceView extends JFrame implements ActionListener{
 	
-	JButton one,two,three,four,five,six,seven,eight,nine,zero,comma,backspace,menu,betalen;
+	JButton one, two, three, four, five,
+			six, seven, eight, nine, zero, comma, backspace, menu, betalen;
 	String bedrag = "";
 	JTextField bedragDisplay;
 	
@@ -20,11 +21,11 @@ public class PriceView extends JFrame implements ActionListener{
 	{
 		setVisible(true);
 		
-		setSize(320,240);
+		setSize(320, 240);
 		setTitle("Prijs invoeren");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new GridLayout(5,2));
+		setLayout(new GridLayout(5, 2));
 		
 		one = new JButton("1");
 		two = new JButton("2");
@@ -76,55 +77,13 @@ public class PriceView extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == one)
-		{
-			bedrag += "1";
-		}
-		if(e.getSource() == two)
-		{
-			bedrag += "2";
-		}
-		if(e.getSource() == three)
-		{
-			bedrag += "3";
-		}
-		if(e.getSource() == four)
-		{
-			bedrag += "4";
-		}
-		if(e.getSource() == five)
-		{
-			bedrag += "5";
-		}
-		if(e.getSource() == six)
-		{
-			bedrag += "6";
-		}
-		if(e.getSource() == seven)
-		{
-			bedrag += "7";
-		}
-		if(e.getSource() == eight)
-		{
-			bedrag += "8";
-		}
-		if(e.getSource() == nine)
-		{
-			bedrag += "9";	
-		}
-		if(e.getSource() == zero)
-		{
-			bedrag += "0";	
-		}
-		if(e.getSource() == comma)
-		{
-			bedrag += ",";
-		}
+		bedrag = String.valueOf(bedragDisplay.getText());
+		bedragDisplay.setText(bedrag + ((JButton) e.getSource()).getText());
 		if(e.getSource() == backspace)
 		{
 			try
 			{
-				bedrag = bedrag.substring(0, bedrag.length()-1);
+				bedragDisplay.setText(bedrag.substring(0, bedrag.length() -1));
 			}
 			catch(StringIndexOutOfBoundsException f){}
 		}
@@ -137,7 +96,7 @@ public class PriceView extends JFrame implements ActionListener{
 		{
 			setVisible(false);
 			new BetalenView();
-		}
-		bedragDisplay.setText(bedrag);
+		}/*
+		bedragDisplay.setText(bedrag);*/
 	}
 }
