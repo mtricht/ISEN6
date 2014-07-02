@@ -133,7 +133,7 @@ public class Screen extends Canvas implements Runnable, MouseListener, MouseMoti
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		appController.mouseClicked(e);
+		
 	}
 
 	@Override
@@ -157,7 +157,7 @@ public class Screen extends Canvas implements Runnable, MouseListener, MouseMoti
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		appController.mouseClicked(e);
 	}
 
 }
