@@ -10,8 +10,7 @@ import java.applet.Applet;
 import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.net.URL;
+
 import rfidadapter.ACR122UA9Adapter;
 import rfidadapter.RfidAdapter;
 
@@ -25,6 +24,7 @@ public class RfidApplet extends Applet implements ActionListener {
 	protected Button statusButton;
 	protected RfidAdapter rfidAdapter;
 	private RfidTool rfidTool;
+	public String uuid;
 
    public void init() {
 		// We'll be using the ACR122U-A9 NFC USB Reader for this project.
@@ -56,14 +56,17 @@ public class RfidApplet extends Applet implements ActionListener {
         }
     }
 
-    public void done(String uuid) {
-    	try {
-    		// TODO: Change URL.
-    		getAppletContext().showDocument(new URL(getCodeBase() + "?uuid=" + uuid));
-	   }
-	   catch (MalformedURLException ex) {
-	    	ex.getMessage();
-	   }
+    @SuppressWarnings("deprecation")
+	public void setID(String uuid) {
+    	this.uuid = uuid;
+    	statusButton.setLabel("Done.");
+    	statusButton.setEnabled(false);
+    	// Stop the thread.
+    	rfidTool.stop();
+    }
+    
+    public String getID(String uuid) {
+    	return uuid;
     }
     
 }

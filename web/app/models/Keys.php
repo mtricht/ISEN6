@@ -12,8 +12,16 @@ class Keys extends \Phalcon\Mvc\Model
 	        "private_key_type" => OPENSSL_KEYTYPE_RSA,
 		);
 		$res = openssl_pkey_new($config);
-		openssl_pkey_export($res, $p);
-		return self::pemToDer($p);
+		$passphrase = self::generatePassphrase();
+		// Grab private key.
+		openssl_pkey_export($res, $p, $passphrase);
+		// Grab public key.
+		$publicKey = openssl_pkey_get_details($res);
+		return array(
+			'privateKey' => self::pemToDer($p),
+			'publicKey' => $publicKey['key'],
+			'passphrase' => $passphrase
+		);
 	}
 
 	protected static function pemToDer($pem_data)
@@ -23,5 +31,14 @@ class Keys extends \Phalcon\Mvc\Model
 	   $pem_data = substr($pem_data, strpos($pem_data, $begin) + strlen($begin));
 	   $pem_data = substr($pem_data, 0, strpos($pem_data, $end));
 	   return preg_replace('/\s+/', '', $pem_data);
+	}
+
+	protected static function generatePassphrase() {
+		$possibilties = array_merge(range(0, 9), range('A', 'F'));
+		$passphrase = "";
+		for ($length = 0; $length < 4; $length++) {
+			$passphrase .= $possibilties[rand(0, count($possibilties)-1)];
+		}
+		return $passphrase;
 	}
 }

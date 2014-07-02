@@ -111,7 +111,7 @@ public class RfidTool extends Thread {
                     }
                     
                     // We're done!
-                    rfidApplet.done(uuid);
+                    rfidApplet.setID(uuid);
                     break;
                 }
                 

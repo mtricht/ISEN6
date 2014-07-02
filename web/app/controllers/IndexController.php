@@ -15,7 +15,7 @@ class IndexController extends ControllerBase
     	$this->view->setVar("title", "Sign up");
 
         // Run validation if we're posting.
-        if ($_POST) {
+        if ($this->request->isPost()) {
             // Save everything submitted!
             if ($this->forms->get('signup')->isValid($_POST)) {
                 // TO-DO: In production redirect user to the selected payment method.
@@ -33,6 +33,22 @@ class IndexController extends ControllerBase
     public function loginAction()
     {
     	$this->view->setVar("title", "Login");
+
+        // Are we posting?
+        if ($this->request->isPost()) {
+            $username = $this->request->getPost('username');
+            $password = $this->request->getPost('password');
+            $user = Users::query()->where("username = '$username'")->execute();
+            if ($user) {
+                if ($this->security->checkHash($password, $user->password)) {
+                    die('ja');
+                } else {
+                    die('nee');
+                }
+            } else {
+                die('nee');
+            }
+        }
     }
 
     public function featuresAction()
