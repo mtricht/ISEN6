@@ -20,13 +20,11 @@ import util.TouchButton;
 public class PriceView extends AppView
 {
 	
-	JButton one, two, three, four, five,
-			six, seven, eight, nine, zero, comma, backspace, menu, betalen;
 	String bedrag = "";
-	JTextField bedragDisplay;
-	ReadProperties readProperties = new ReadProperties();
+	public List<TouchButton> buttons;
+	String s;
 	
-	boolean active = true;
+	public boolean active = true;
 	public PriceView()
 	{
 		buttons = Arrays.asList(
@@ -52,9 +50,7 @@ public class PriceView extends AppView
 		s = "Bedrag Invoeren";
 
 	}
-	public List<TouchButton> buttons;
 	
-	String s;
 	public void render(Graphics2D g)
 	{
 		if(active){
@@ -74,22 +70,9 @@ public class PriceView extends AppView
 			g.drawString(bedrag, 100, 100);
 			g.drawString(s, 90, 80);
 			g.setColor(Color.BLUE);
-		/*	
-			g.drawString("0", 55, 185);
-			g.drawString("1", 95, 185);
-			g.drawString("2", 135, 185);
-			g.drawString("3", 175, 185);
-			g.drawString("4", 215, 185);
-			g.drawString("5", 255, 185);
-			g.drawString("6", 55, 225);
-			g.drawString("7", 95, 225);
-			g.drawString("8", 135, 225);
-			g.drawString("9", 175, 225);
-			g.drawString(",", 215, 225);
-			g.drawString("Ok", 250, 225);
+	
 			//active = !active;
-			 * 
-			 */
+			 
 		}
 		
 	}
@@ -101,37 +84,4 @@ public class PriceView extends AppView
 
 }
 	
-	//public void gotoInstellingen()
-	//{
-		/*if(bedragDisplay.getText().equals( readProperties.getPropertiesPin()))
-		{
-			setVisible(false);
-			new SettingsView();
-		}*/
-	 //}
-	
-	/*@Override
-	public void actionPerformed(ActionEvent e) {
-		bedrag = String.valueOf(bedragDisplay.getText());
-		bedragDisplay.setText(bedrag + ((JButton) e.getSource()).getText());
-		if(e.getSource() == backspace)
-		{
-			try
-			{
-				bedragDisplay.setText(bedrag.substring(0, bedrag.length() -1));
-			}
-			catch(StringIndexOutOfBoundsException f){}
-		}
-		if(e.getSource() == menu)
-		{
-			setVisible(false);
-			new MainMenuView();
-		}
-		if(e.getSource() == betalen)
-		{
-			setVisible(false);
-			new BetalenView();
-		}
-		gotoInstellingen();
-	}
-}*/
+
