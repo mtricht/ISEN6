@@ -27,5 +27,4 @@
     		</div>
     	</div>
     </div>
-    <div style="min-height:300px"></div>
 </div>
