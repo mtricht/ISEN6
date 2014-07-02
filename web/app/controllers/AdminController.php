@@ -5,13 +5,7 @@ use Phalcon\Http\Response;
 class AdminController extends ControllerBase
 {
 
-    public function onConstruct()
-    {
-        $exceptions = array('index', 'accept');
-        if (!$this->session->has('login') && !in_array($this->dispatcher->getActionName(), $exceptions)) {
-            $this->response->redirect('login');
-        }
-    }
+    public $exceptions = array('index', 'accept');
 
     public function indexAction()
     {
@@ -53,7 +47,7 @@ class AdminController extends ControllerBase
             $this->session->remove("passphrase");
 
             // Send email
-            mail($registration->email, "Your bitpin has been created!", "Hello,\n\nYour bitpin has been created and will be send ASAP!");
+            mail($registration->email, "bitPin", "Hello,\n\nYour bitpin has been created and will be send ASAP!");
 
             // Display PDF.
             include '../app/libraries/mPDF/mpdf.php';

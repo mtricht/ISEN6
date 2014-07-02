@@ -23,7 +23,6 @@ return new \Phalcon\Config(array(
     'root_routes' => array(
         'signup' => 'index',
         'login' => 'index',
-        'features' => 'index',
         'logout' => 'index'
     )
 ));

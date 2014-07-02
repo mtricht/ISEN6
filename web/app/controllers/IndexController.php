@@ -3,13 +3,7 @@
 class IndexController extends ControllerBase
 {
 
-    public function onConstruct()
-    {
-        $exceptions = array('login', 'index', 'features', 'signup');
-        if (!$this->session->has('login') && !in_array($this->dispatcher->getActionName(), $exceptions)) {
-            $this->response->redirect('login');
-        }
-    }
+    public $exceptions = array('login', 'index', 'features', 'signup');
 
     public function indexAction()
     {
@@ -49,6 +43,7 @@ class IndexController extends ControllerBase
             if (count($user) > 0) {
                 if ($this->security->checkHash($password, $user->password)) {
                     $this->session->set('login', true);
+                    $this->session->set('user', $user->id);
                     // Redirect to home page.
                     $this->response->redirect('');
                 }
@@ -61,6 +56,7 @@ class IndexController extends ControllerBase
     public function logoutAction()
     {
         $this->session->remove('login');
+        $this->session->remove('user');
         $this->response->redirect('');
     }
 
