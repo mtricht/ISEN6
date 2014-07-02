@@ -36,18 +36,25 @@ class AdminController extends ControllerBase
                 'password' => $this->security->hash($credentials['password']),
                 'card_id' => $_POST['uuid']
             ));
+
             // Save the card ID with public key.
             $key = new Keys();
             $key->save(array(
                 'card_id' => $_POST['uuid'],
                 'rsa_public_key' => $this->session->get('publicKey')
             ));
+
             // Delete registration as it's accepted now.
             $registration->delete();
+
             // Unset session
             $passphrase = $this->session->get("passphrase");
             $this->session->remove("publicKey");
             $this->session->remove("passphrase");
+
+            // Send email
+            mail($registration->email, "Your bitpin has been created!", "Hello,\n\nYour bitpin has been created and will be send ASAP!");
+
             // Display PDF.
             include '../app/libraries/mPDF/mpdf.php';
             $mpdf = new mPDF();
