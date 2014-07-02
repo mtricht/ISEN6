@@ -1,9 +1,15 @@
 <?php
 
-use Phalcon\Http\Response;
-
 class IndexController extends ControllerBase
 {
+
+    public function onConstruct()
+    {
+        if (!$this->session->has('login')) {
+            $response = new Response();
+            return $response->redirect('login');
+        }
+    }
 
     public function indexAction()
     {
@@ -22,8 +28,7 @@ class IndexController extends ControllerBase
                 $registration = new Registrations();
                 if ($registration->save($_POST)) {
                     // Redirect if everything went well saving it.
-                    $response = new Response();
-                    return $response->redirect('login');
+                    $this->response->redirect('');
                 }
             }
             // Else let the view and form handle the rest.
@@ -32,23 +37,30 @@ class IndexController extends ControllerBase
 
     public function loginAction()
     {
+        if ($this->session->has('login')) {
+            $this->response->redirect('');
+        }
     	$this->view->setVar("title", "Login");
-
         // Are we posting?
         if ($this->request->isPost()) {
             $username = $this->request->getPost('username');
             $password = $this->request->getPost('password');
-            $user = Users::query()->where("username = '$username'")->execute();
-            if ($user) {
+            $user = Users::findFirst("username = '$username'");
+            if (count($user) > 0) {
                 if ($this->security->checkHash($password, $user->password)) {
-                    die('ja');
-                } else {
-                    die('nee');
+                    $this->session->set('login', true);
+                    // Redirect to home page.
+                    $this->response->redirect('');
                 }
-            } else {
-                die('nee');
             }
+            $this->flash->error('Wrong username/password combination.');
         }
+    }
+
+    public function logoutAction()
+    {
+        $this->session->remove('login');
+        $this->response->redirect('');
     }
 
     public function featuresAction()

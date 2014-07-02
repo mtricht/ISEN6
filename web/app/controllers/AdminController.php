@@ -5,6 +5,13 @@ use Phalcon\Http\Response;
 class AdminController extends ControllerBase
 {
 
+    public function onConstruct()
+    {
+        if (!$this->session->has('login')) {
+            $this->response->redirect('login');
+        }
+    }
+
     public function indexAction()
     {
     	$this->view->setVar("title", "Admin Panel");
@@ -30,7 +37,8 @@ class AdminController extends ControllerBase
             $user = new Users();
             $user->save(array(
                 'username' => $credentials['username'] ,
-                'password' => $this->security->hash($credentials['password'])  
+                'password' => $this->security->hash($credentials['password']),
+                'card_id' => $_POST['uuid']
             ));
             // Save the card ID with public key.
             $key = new Keys();

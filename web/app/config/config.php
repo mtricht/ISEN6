@@ -24,5 +24,6 @@ return new \Phalcon\Config(array(
         'signup' => 'index',
         'login' => 'index',
         'features' => 'index',
+        'logout' => 'index'
     )
 ));

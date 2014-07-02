@@ -31,7 +31,7 @@ class BootstrapForm extends Form
         return $decoratedInput;
     }
 
-    public function render()
+    public function render($name = '', $attributes = NULL)
     {
         // Loop through every field.
         $decoratedForm = '<form role="form" method="post">';
