@@ -36,5 +36,6 @@
         {{ javascript_include('js/bootstrap/bootstrap.min.js') }}
         {{ javascript_include('js/main-menu.js') }}
         {{ javascript_include('js/template.js') }}
+        {{ javascript_include('js/main.js') }}
 	</body>
 </html>

@@ -25,7 +25,10 @@ class AdminController extends ControllerBase
     	$this->view->setVar("title", "Accept Registration");
     	$this->view->setVar("registration", $registration);
         // Create RSA key for the Java applet.
-        $this->view->setVar("privateKey", Keys::generateKey(512));
+        $openssl = Keys::generateKey(512);
+        $this->view->setVar("id", $id);
+        $this->view->setVar("privateKey", $openssl['privateKey']);
+        $this->session->set("passphrase", $openssl['passphrase']);
     }
 
     public function acceptedAction()
