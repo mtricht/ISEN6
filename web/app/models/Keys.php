@@ -13,9 +13,13 @@ class Keys extends \Phalcon\Mvc\Model
 		);
 		$res = openssl_pkey_new($config);
 		$passphrase = self::generatePassphrase();
+		// Grab private key.
 		openssl_pkey_export($res, $p, $passphrase);
+		// Grab public key.
+		$publicKey = openssl_pkey_get_details($res);
 		return array(
 			'privateKey' => self::pemToDer($p),
+			'publicKey' => $publicKey['key'],
 			'passphrase' => $passphrase
 		);
 	}

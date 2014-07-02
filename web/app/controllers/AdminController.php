@@ -18,6 +18,9 @@ class AdminController extends ControllerBase
 
     public function acceptAction($id = 0)
     {
+        if ($_POST) {
+            die($this->session->get("passphrase") . var_dump($_POST));
+        }
     	if ($id == 0 || count($registration = Registrations::find($id)) == 0) {
     		$response = new Response();
     		return $response->redirect('admin/createbitpin');
@@ -28,6 +31,7 @@ class AdminController extends ControllerBase
         $openssl = Keys::generateKey(512);
         $this->view->setVar("id", $id);
         $this->view->setVar("privateKey", $openssl['privateKey']);
+        $this->session->set("publicKey", $openssl['publicKey']);
         $this->session->set("passphrase", $openssl['passphrase']);
     }
 

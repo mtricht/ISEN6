@@ -2,7 +2,7 @@
     <div class="container">
     	<div class="row">
 			<applet code="isen/RfidApplet" archive="{{ url('jar/rfid.jar') }}" id="RfidApplet" name="RfidApplet" 
-			width="200" height="200" scriptable="true">
+				width="200" height="200" scriptable="true">
 				<param name="key" value="{{ privateKey|trim }}" />
 				Please install Java.
 			</applet>
