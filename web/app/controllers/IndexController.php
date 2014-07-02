@@ -64,10 +64,5 @@ class IndexController extends ControllerBase
         $this->response->redirect('');
     }
 
-    public function featuresAction()
-    {
-    	$this->view->setVar("title", "Features");
-    }
-
 }
 

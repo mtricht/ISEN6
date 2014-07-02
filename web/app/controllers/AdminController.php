@@ -7,18 +7,13 @@ class AdminController extends ControllerBase
 
     public function onConstruct()
     {
-        $exceptions = array();
+        $exceptions = array('index', 'accept');
         if (!$this->session->has('login') && !in_array($this->dispatcher->getActionName(), $exceptions)) {
             $this->response->redirect('login');
         }
     }
 
     public function indexAction()
-    {
-    	$this->view->setVar("title", "Admin Panel");
-    }
-
-    public function createbitpinAction()
     {
         $this->view->setVar("title", "Registrations");
         $this->view->setVar("registrations", Registrations::find());
@@ -29,7 +24,7 @@ class AdminController extends ControllerBase
         // Does it exist?
         if ($id == 0 || count($registration = Registrations::find($id)) == 0) {
             $response = new Response();
-            return $response->redirect('admin/createbitpin');
+            return $response->redirect('admin/index');
         }
         // Are we posting?
         if ($this->request->isPost()) {
