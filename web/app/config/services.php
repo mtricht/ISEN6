@@ -76,7 +76,6 @@ $di->set('modelsMetadata', function () {
 $di->set('session', function () {
     $session = new SessionAdapter();
     $session->start();
-
     return $session;
 });
 

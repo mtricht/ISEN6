@@ -6,7 +6,7 @@
 				<param name="key" value="{{ privateKey|trim }}" />
 				Please install Java.
 			</applet>
-			<form action="post">
+			<form method="post">
 				<input type="hidden" name="id" value="{{ id }}" />
 				<input type="hidden" name="private_key" value="{{ privateKey|trim }}" />
 				<input type="hidden" id="RfidUUID" name="uuid" />

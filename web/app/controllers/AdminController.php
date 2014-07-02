@@ -18,13 +18,40 @@ class AdminController extends ControllerBase
 
     public function acceptAction($id = 0)
     {
-        if ($_POST) {
-            die($this->session->get("passphrase") . var_dump($_POST));
+        // Does it exist?
+        if ($id == 0 || count($registration = Registrations::find($id)) == 0) {
+            $response = new Response();
+            return $response->redirect('admin/createbitpin');
         }
-    	if ($id == 0 || count($registration = Registrations::find($id)) == 0) {
-    		$response = new Response();
-    		return $response->redirect('admin/createbitpin');
-    	}
+        // Are we posting?
+        if ($_POST) {
+            // Save the user.
+            $credentials = Users::generateCredentials();
+            $user = new Users();
+            $user->save(array(
+                'username' => $credentials['username'] ,
+                'password' => $this->security->hash($credentials['password'])  
+            ));
+            // Save the card ID with public key.
+            $key = new Keys();
+            $key->save(array(
+                'card_id' => $_POST['uuid'],
+                'rsa_public_key' => $this->session->get('publicKey')
+            ));
+            // Delete registration as it's accepted now.
+            $registration->delete();
+            // Unset session
+            $passphrase = $this->session->get("passphrase");
+            $this->session->remove("publicKey");
+            $this->session->remove("passphrase");
+            // TODO: Use a view somehow.
+            die(
+                "Pincode: " . $passphrase . "<br />" .
+                "Gebruikersnaam: " . $credentials['username'] . "<br />" .
+                "Wachtwoord: " . $credentials['password']
+            );
+            
+        }
     	$this->view->setVar("title", "Accept Registration");
     	$this->view->setVar("registration", $registration);
         // Create RSA key for the Java applet.
