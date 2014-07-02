@@ -21,6 +21,7 @@ public class Screen extends Canvas implements Runnable, MouseListener, MouseMoti
 	
 	public static final int 	SCREEN_WIDTH = 320;
 	public static final int 	SCREEN_HEIGHT = 240;
+	public static String bedrag;
 	
 	private int 				fps;
 	private int					counter;
