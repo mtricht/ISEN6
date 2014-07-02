@@ -24,7 +24,7 @@ class AdminController extends ControllerBase
             return $response->redirect('admin/createbitpin');
         }
         // Are we posting?
-        if ($_POST) {
+        if ($this->request->isPost()) {
             // Save the user.
             $credentials = Users::generateCredentials();
             $user = new Users();
