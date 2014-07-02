@@ -22,11 +22,19 @@ public class PriceController extends AppController{
 	{
 		for(TouchButton tb : priceView.buttons)
 		{
+			if(tb.name.equals(",") && bedrag.length() == 0)
+				return;
+			
+			
+			
 			if(!tb.name.equals("") && e.getX() > tb.location.x && e.getX() < tb.location.x + tb.xSize )
 			{
 				if(e.getY() > tb.location.y && e.getY() < tb.location.y + tb.ySize){
 					if(!tb.name.equals("Ok") && !tb.name.equals("<")){
 						bedrag += tb.name;
+						
+					
+						
 						if(bedrag.equals(",,,123,,,"))
 						{
 							Screen.appView = new InstellingenView();
