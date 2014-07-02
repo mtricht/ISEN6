@@ -5,13 +5,13 @@ use Phalcon\Db\Index;
 use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
-class RegistrationMigration_101 extends Migration
+class RegistrationsMigration_101 extends Migration
 {
 
     public function up()
     {
         $this->morphTable(
-            'registration',
+            'registrations',
             array(
             'columns' => array(
                 new Column(
@@ -71,7 +71,7 @@ class RegistrationMigration_101 extends Migration
                 )
             ),
             'indexes' => array(
-                new Index('PRIMARY', array('id')),
+                new Index('PRIMARY', array('id'))
             ),
             'options' => array(
                 'TABLE_TYPE' => 'BASE TABLE',

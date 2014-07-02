@@ -17,7 +17,9 @@ sudo pip install flask flask-mysql python-bitcoinrpc simplejson
 if [ ! -d "pycrypto-2.6.1" ]; then
 	sudo wget https://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/pycrypto-2.6.1.tar.gz
 	sudo tar -xzvf pycrypto-2.6.1.tar.gz
+	cd pycrypto-2.6.1
 	sudo python pycrypto-2.6.1/setup.py install
+	cd /home/vagrant/
 fi
 
 # Phalconphp
@@ -26,6 +28,7 @@ if [ ! -d "cphalcon" ]; then
 	cd cphalcon/build
 	sudo ./install
 	sudo echo 'extension=phalcon.so' > /etc/php.d/phalcon.ini
+	cd /home/vagrant/
 fi
 
 # Phalconphp dev tools
