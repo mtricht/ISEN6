@@ -80,7 +80,6 @@ public class BetalenView extends JFrame implements ActionListener{
 		if(e.getSource() == menu)
 		{
 			setVisible(false);
-			new MainMenuView();
 		}
 		if(e.getSource() == backspace)
 		{
@@ -92,8 +91,7 @@ public class BetalenView extends JFrame implements ActionListener{
 		}
 		if(e.getSource() == accept)
 		{
-			setVisible(false);
-			new AcceptView();	
+			setVisible(false);	
 		}
 	}
 	
