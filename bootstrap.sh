@@ -2,7 +2,7 @@
 
 # Requirements
 sudo rpm -Uvh http://mirror.webtatic.com/yum/el6/latest.rpm
-sudo yum -y install vim httpd mysql mysql-server php55w php55w-opcache php55w-mysql php55w-devel gcc libtool git wget pcre-devel.x86_64 python-devel mysql-devel.x86_64 mod_wsgi.x86_64
+sudo yum -y install vim httpd mysql mysql-server php55w php55w-opcache php55w-mysql php55w-devel gcc libtool git wget pcre-devel.x86_64 python-devel mysql-devel.x86_64 mod_wsgi.x86_64 yum install php55w-mbstring.x86*
 
 # pip
 if [ ! -f "get-pip.py" ]; then

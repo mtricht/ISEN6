@@ -20,8 +20,8 @@
     		<div class="col-md-4 col-sm-6">
     			<div class="service-wrapper">
                     {{ image('img/service-icon/ruler.png') }}
-                    <h3>Log off</h3>
-        			<p><br />Exit the bitPin web admin panel.</p>
+                    <h3>Manage users</h3>
+        			<p><br />Manage existing users.</p>
         			{{ link_to('features', 'Goodbye', 'class': 'btn') }}
         		</div>
     		</div>

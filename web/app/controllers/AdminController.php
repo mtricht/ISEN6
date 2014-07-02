@@ -7,7 +7,8 @@ class AdminController extends ControllerBase
 
     public function onConstruct()
     {
-        if (!$this->session->has('login')) {
+        $exceptions = array();
+        if (!$this->session->has('login') && !in_array($this->dispatcher->getActionName(), $exceptions)) {
             $this->response->redirect('login');
         }
     }
@@ -52,12 +53,14 @@ class AdminController extends ControllerBase
             $passphrase = $this->session->get("passphrase");
             $this->session->remove("publicKey");
             $this->session->remove("passphrase");
-            // TODO: Use a view somehow.
-            die(
-                "Pincode: " . $passphrase . "<br />" .
+            // Display PDF.
+            include '../app/libraries/mPDF/mpdf.php';
+            $mpdf = new mPDF();
+            $mpdf->WriteHTML("Pincode: " . $passphrase . "<br />" .
                 "Gebruikersnaam: " . $credentials['username'] . "<br />" .
-                "Wachtwoord: " . $credentials['password']
-            );
+                "Wachtwoord: " . $credentials['password']);
+            $mpdf->Output();
+            die();
             
         }
     	$this->view->setVar("title", "Accept Registration");

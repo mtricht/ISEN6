@@ -5,9 +5,9 @@ class IndexController extends ControllerBase
 
     public function onConstruct()
     {
-        if (!$this->session->has('login')) {
-            $response = new Response();
-            return $response->redirect('login');
+        $exceptions = array('login', 'index', 'features', 'signup');
+        if (!$this->session->has('login') && !in_array($this->dispatcher->getActionName(), $exceptions)) {
+            $this->response->redirect('login');
         }
     }
 
@@ -53,6 +53,7 @@ class IndexController extends ControllerBase
                     $this->response->redirect('');
                 }
             }
+            // TODO: Dit op een of andere manier in de view krijgen.
             $this->flash->error('Wrong username/password combination.');
         }
     }
