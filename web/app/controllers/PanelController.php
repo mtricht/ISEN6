@@ -10,7 +10,10 @@ class PanelController extends ControllerBase
         // Bitcoin address
         $this->view->setVar('bitcoinAddress', $this->user->bitcoin_address);
         // Account balance
+
         // Transaction history
-        // Kunenn Overschrijven
+
+        // Kunnen Overschrijven
+
     }
 }

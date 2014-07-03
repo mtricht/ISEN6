@@ -22,21 +22,22 @@ class AdminController extends ControllerBase
         }
         // Are we posting?
         if ($this->request->isPost()) {
+            // Save the card ID with public key.
+            /*$key = new Keys();
+            $key->save(array(
+                'card_id' => $_POST['uuid'],
+                'rsa_public_key' => $this->session->get('publicKey')
+            ));
+
             // Save the user.
             $credentials = Users::generateCredentials();
             $user = new Users();
             $user->save(array(
                 'username' => $credentials['username'] ,
                 'password' => $this->security->hash($credentials['password']),
-                'card_id' => $_POST['uuid']
+                'card_id' => $key->id
             ));
-
-            // Save the card ID with public key.
-            $key = new Keys();
-            $key->save(array(
-                'card_id' => $_POST['uuid'],
-                'rsa_public_key' => $this->session->get('publicKey')
-            ));
+            $user = User::find("username = '" . $credentials['username'] . "'");
 
             // Delete registration as it's accepted now.
             $registration->delete();
@@ -44,8 +45,12 @@ class AdminController extends ControllerBase
             // Unset session
             $passphrase = $this->session->get("passphrase");
             $this->session->remove("publicKey");
-            $this->session->remove("passphrase");
+            $this->session->remove("passphrase");*/
 
+            // Generate bitcoin address.
+            $bitPin = new bitPin();
+            $bitPin->makeAccount(1);
+            die();
             // Send email
             mail($registration->email, "bitPin", "Hello,\n\nYour bitpin has been created and will be send ASAP!");
 
@@ -57,7 +62,6 @@ class AdminController extends ControllerBase
                 "Wachtwoord: " . $credentials['password']);
             $mpdf->Output();
             die();
-            
         }
     	$this->view->setVar("title", "Accept Registration");
     	$this->view->setVar("registration", $registration);
