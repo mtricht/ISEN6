@@ -34,7 +34,7 @@ public class AcceptatieController extends AppController{
 					{
 						Screen.appView = new VerifierenView();
 						Screen.appController = new VerifierenController(Screen.appView);
-						acceptatieView.active=false; 
+						acceptatieView.active = false; 
 					}
 					
 				}

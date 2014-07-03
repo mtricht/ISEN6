@@ -6,13 +6,9 @@ public class AppView {
 
 	public AppView()
 	{
-		
 	}
 	
 	public void render(Graphics2D g)
 	{
-		
 	}
-	
-	
 }

@@ -6,6 +6,7 @@ import java.awt.DisplayMode;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import rsa.RSA;
 import view.FullScreen;
 
 public class TerminalApp extends JFrame{
@@ -19,7 +20,7 @@ public class TerminalApp extends JFrame{
 		FullScreen f = new FullScreen();
 		DisplayMode dm = new DisplayMode(1366, 768, 32, DisplayMode.REFRESH_RATE_UNKNOWN);
 		
-		f.setFullScreen(dm, this);
+		//f.setFullScreen(dm, this);
 
 		JPanel panel = new JPanel(new BorderLayout());
 		Screen sc = new Screen();

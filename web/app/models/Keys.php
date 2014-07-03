@@ -19,7 +19,6 @@ class Keys extends \Phalcon\Mvc\Model
 		openssl_pkey_export($res, $p, $passphrase);
 		// Grab public key.
 		$publicKey = openssl_pkey_get_details($res);
-		die(var_Dump(self::pemToDer($p)));
 		return array(
 			'privateKey' => self::pemToDer($p),
 			'publicKey' => $publicKey['key'],

@@ -19,12 +19,23 @@ public class PasController extends AppController{
 	{
 		pasView = (PasView) appView;
 		rfidReader = new RfidReader();
-		rfidReader.run();
+		handleRfidReader();
+	}
+	
+	private void handleRfidReader()
+	{
+		rfidReader.start();
+		rfidReader.setController(this);
+	}
+	
+	public void done()
+	{
 		rfidReader.interrupt();
 		Screen.appView = new PinView();
 		Screen.appController = new PinController(Screen.appView);
 		pasView.active = false;
 	}
+	
 	public void mouseClicked(MouseEvent e)
 	{
 		for(TouchButton tb : pasView.buttons)
@@ -36,7 +47,7 @@ public class PasController extends AppController{
 					{
 						Screen.appView = new PriceView();
 						Screen.appController = new PriceController(Screen.appView);
-						pasView.active=false; 
+						pasView.active = false; 
 					}
 					
 				}

@@ -1,7 +1,27 @@
 package controller;
 
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.security.AlgorithmParameters;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.interfaces.RSAPrivateCrtKey;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.security.spec.RSAPublicKeySpec;
 
+import javax.crypto.Cipher;
+import javax.crypto.EncryptedPrivateKeyInfo;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
+import rfidadapter.RfidReader;
+import rsa.RSA;
 import startup.Screen;
 import util.TouchButton;
 import view.AcceptatieView;
@@ -13,6 +33,7 @@ public class PinController extends AppController{
 
 	PinView pinView;
 	public String pin = new String();
+	
 	public PinController(AppView appView)
 	{
 		pinView = (PinView) appView;
@@ -36,20 +57,28 @@ public class PinController extends AppController{
 					}
 					if(tb.name.equals("Ok"))
 					{
-						Screen.appView = new AcceptatieView();
-						Screen.appController = new AcceptatieController(Screen.appView);
-						pinView.active = false;
+						if (checkPin()) {
+							Screen.appView = new AcceptatieView();
+							Screen.appController = new AcceptatieController(Screen.appView);
+							pinView.active = false;
+						} else {
+							// TODO: Error weergeven ergens.
+						}
 					}
 					if(tb.name.equals("<-"))
 					{
 						Screen.appView = new PriceView();
 						Screen.appController = new PriceController(Screen.appView);
-						pinView.active=false; 
+						pinView.active = false; 
 					}
-					
 				}
 			}
 		}
+	}
 
+	private boolean checkPin()
+	{	
+		RSA.decryptPrivateKey(RfidReader.privateKey, pin.toCharArray());
+		return false;
 	}
 }

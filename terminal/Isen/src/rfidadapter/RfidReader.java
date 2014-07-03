@@ -16,14 +16,17 @@ import javax.smartcardio.CommandAPDU;
 import javax.smartcardio.ResponseAPDU;
 import javax.smartcardio.TerminalFactory;
 
+import controller.PasController;
 import sun.misc.BASE64Encoder;
 
 public class RfidReader extends Thread {
 	
 	final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
-	public static String privateKey, accountId;
+	public static byte[] privateKey;
+	public static String accountId;
 	public static boolean done = false;
 	public RfidAdapter rfidAdapter;
+	private PasController pasController;
 	
 	public void run() {
 		rfidAdapter = new ACR122UA9Adapter();
@@ -42,7 +45,7 @@ public class RfidReader extends Thread {
                     loop = false;
                 }
             } catch (NoSuchAlgorithmException|CardException|InterruptedException ex) {
-                System.out.println(ex);
+                //System.out.println(ex);
             }
         }
 	}
@@ -103,8 +106,7 @@ public class RfidReader extends Thread {
                 	}
                 	currentBlock++;
                 }
-                BASE64Encoder encoder = new BASE64Encoder();
-                privateKey = encoder.encodeBuffer(message);
+                privateKey = message;
                 done = true;
             } catch (CardException|ArrayIndexOutOfBoundsException ex) {
                 //ex.printStackTrace();
@@ -112,7 +114,7 @@ public class RfidReader extends Thread {
             try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
         }
     }
@@ -127,4 +129,9 @@ public class RfidReader extends Thread {
         }
         return new String(hexChars);
     }
+
+	public void setController(PasController pasController)
+	{
+		this.pasController = pasController;
+	}
 }
