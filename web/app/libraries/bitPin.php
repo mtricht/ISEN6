@@ -17,7 +17,7 @@ class bitPin extends \Curl\Curl {
 	}
 
 	public function makeAccount($cardId) {
-		$this->post($this->apiServer . 'wallet/poep', json_encode(array(
+		$this->post($this->apiServer . 'wallet/createaddress', json_encode(array(
 			'signature' => null,
 			'data' => array(
 				'api_token' => $this->apiToken,

@@ -13,12 +13,12 @@ public class PasView extends AppView{
 
 	public List<TouchButton> buttons;
 	public boolean active = true;
+	
 	public PasView()
 	{
 		buttons = Arrays.asList( 
-				new TouchButton(new Point(0,0),"<-"),
-				new TouchButton(new Point(0,120),"Ok")
-				);
+			new TouchButton(new Point(0,0),"<-")
+		);
 	}
 	
 	public void render(Graphics2D g)

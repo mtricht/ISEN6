@@ -9,17 +9,17 @@ import javax.swing.JPanel;
 import view.FullScreen;
 
 public class TerminalApp extends JFrame{
-
 	
+	private static final long serialVersionUID = 2502662043151826952L;
 	public static void main(String[] args) {
 		new TerminalApp();
 	}
 	public TerminalApp()
 	{
 		FullScreen f = new FullScreen();
-		DisplayMode dm=new DisplayMode(1366, 768, 32, DisplayMode.REFRESH_RATE_UNKNOWN);
+		DisplayMode dm = new DisplayMode(1366, 768, 32, DisplayMode.REFRESH_RATE_UNKNOWN);
 		
-		f.setFullScreen(dm, this);
+		//f.setFullScreen(dm, this);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		//setIconImage();
 
@@ -29,17 +29,8 @@ public class TerminalApp extends JFrame{
 		setContentPane(panel);
 		pack();
 		sc.start();
-
 		setLocationRelativeTo(null);
-		
-		
 		setVisible(true);
-		
-		
-			
-		
-		
-		//new PriceView();
 	}
 
 }

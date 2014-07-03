@@ -5,7 +5,10 @@ package isen;
  * @author Michael
  */
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
@@ -81,9 +84,30 @@ public class RfidTool extends Thread {
                     int blocksNeeded = (int) key.length/16;
                     if ((key.length % 16) > 0)
                     	blocksNeeded += 1;
-
-                    // We start at block 1. Block 0 is the manufacture block.
-                    int currentBlock = 1;
+                    System.out.println(blocksNeeded);
+                    // Block 1 is how much blocks we're writing.
+                    byte[] blockCount = ByteBuffer.allocate(4).order(ByteOrder.BIG_ENDIAN).putInt(blocksNeeded).array();
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
+                    try {
+                        outputStream.write(blockCount);
+                        outputStream.write(new byte[]{(byte) 0x00, (byte) 0x00, (byte) 0x00,
+                        		(byte) 0x00, (byte) 0x00, (byte) 0x00,
+                        		(byte) 0x00, (byte) 0x00, (byte) 0x00,
+                        		(byte) 0x00, (byte) 0x00, (byte) 0x00});
+                    } catch (IOException ex) {
+                        System.out.println(ex);
+                    }
+                    command = new CommandAPDU(rfidApplet.rfidAdapter.authenticateBlock((byte) 1));
+                	response = channel.transmit(command);
+                	byteArray = response.getBytes();
+                	System.out.println( bytesToHex( byteArray ) );
+                	command = new CommandAPDU(rfidApplet.rfidAdapter.writeBlock((byte) 1, outputStream.toByteArray()));
+                	response = channel.transmit(command);
+                	byteArray = response.getBytes();
+                	System.out.println( bytesToHex( byteArray ) );
+                	
+                    // We start at block 2. Block 0 is the manufacture block, block 0 is for the length.
+                    int currentBlock = 2;
                     // Write the key away.
                     for (int i = 0; i < blocksNeeded; i++) {
                     	byte[] message = new byte[16];
