@@ -8,17 +8,16 @@ wallet = Blueprint('wallet', __name__, template_folder='wat')
 @wallet.before_request
 def filter():
 	error = filters.verifyrequest(request)
-	if isinstance(error, flask.Response):
-		return jsonify(error)
+	if not isinstance(error, bool):
+		return error
 
 @wallet.route('/', methods=['POST'])
 def index():
-	#if not filters.required_params(request, 'account'):
-	#	abort(404)
+	if not filters.required_params(request, 'account'):
+		abort(404)
 
-	#fields = simplejson.loads(request.data)['data']
-	return json_error('well played', 123,)
+	fields = simplejson.loads(request.data)['data']
 
-	#obj = { 'balance': g.bitrpc.getbalance(fields['account']), \
-	#		'type': 'bitcoin' }
-	#return jsonify(obj)
+	obj = { 'balance': g.bitrpc.getbalance(fields['account']), \
+			'type': 'bitcoin' }
+	return jsonify(obj)

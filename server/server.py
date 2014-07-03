@@ -28,7 +28,7 @@ mysql.init_app(app)
 @app.before_request
 def startup():
 	g.db = mysql.get_db()
-	#g.bitrpc = AuthServiceProxy('http://bitpin:2@localhost:18332');
+	g.bitrpc = AuthServiceProxy('http://bitpin:2@steamep.com:18333');
 
 #Import all used controllers here
 from controllers.wallet import wallet as wallet_controller
