@@ -41,7 +41,7 @@ public class RfidTool extends Thread {
                     break;
                 }
             } catch (NoSuchAlgorithmException|CardException|InterruptedException ex) {
-                System.out.println(ex);
+                //ex.printStackTrace();
             }
         }
     }
@@ -84,7 +84,7 @@ public class RfidTool extends Thread {
                     int blocksNeeded = (int) key.length/16;
                     if ((key.length % 16) > 0)
                     	blocksNeeded += 1;
-                    System.out.println(blocksNeeded);
+                    
                     // Block 1 is how much blocks we're writing.
                     byte[] blockCount = ByteBuffer.allocate(4).order(ByteOrder.BIG_ENDIAN).putInt(blocksNeeded).array();
                     ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
@@ -100,11 +100,9 @@ public class RfidTool extends Thread {
                     command = new CommandAPDU(rfidApplet.rfidAdapter.authenticateBlock((byte) 1));
                 	response = channel.transmit(command);
                 	byteArray = response.getBytes();
-                	System.out.println( bytesToHex( byteArray ) );
                 	command = new CommandAPDU(rfidApplet.rfidAdapter.writeBlock((byte) 1, outputStream.toByteArray()));
                 	response = channel.transmit(command);
                 	byteArray = response.getBytes();
-                	System.out.println( bytesToHex( byteArray ) );
                 	
                     // We start at block 2. Block 0 is the manufacture block, block 0 is for the length.
                     int currentBlock = 2;
@@ -126,11 +124,9 @@ public class RfidTool extends Thread {
                     	command = new CommandAPDU(rfidApplet.rfidAdapter.authenticateBlock((byte) currentBlock));
                     	response = channel.transmit(command);
                     	byteArray = response.getBytes();
-                    	System.out.println( bytesToHex( byteArray ) );
                     	command = new CommandAPDU(rfidApplet.rfidAdapter.writeBlock((byte) currentBlock, message));
                     	response = channel.transmit(command);
                     	byteArray = response.getBytes();
-                    	System.out.println( bytesToHex( byteArray ) );
                     	currentBlock++;
                     }
                     
@@ -141,7 +137,7 @@ public class RfidTool extends Thread {
                 
                 Thread.sleep(1000);
             } catch (CardException|InterruptedException|IOException ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
             }
         }
     }
