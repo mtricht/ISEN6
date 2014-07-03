@@ -4,10 +4,10 @@ class Users extends \Phalcon\Mvc\Model
 {
 
 	public static function generateCredentials() {
-		$possibilties = array_merge(range(0, 9), range('a', 'z'), range('A', 'Z'));
+		$possibilities = array_merge(range(0, 9), range('a', 'z'), range('A', 'Z'));
 		$password = "";
 		for ($length = 0; $length <= 10; $length++) {
-			$password .= $possibilties[rand(0, count($possibilties)-1)];
+			$password .= $possibilties[rand(0, count($possibilities)-1)];
 		}
 		return array(
 			'username' => self::generateUsername(),
@@ -16,10 +16,10 @@ class Users extends \Phalcon\Mvc\Model
 	}
 
 	protected static function generateUsername() {
-		$possibilties = array_merge(range(0, 9), range('a', 'z'), range('A', 'Z'));
+		$possibilities = array_merge(range(0, 9), range('a', 'z'), range('A', 'Z'));
 		$username = "";
 		for ($length = 0; $length <= 8; $length++) {
-			$username .= $possibilties[rand(0, count($possibilties)-1)];
+			$username .= $possibilties[rand(0, count($possibilities)-1)];
 		}
 		$user = self::find("username = '$username'");
 		// Username taken.

@@ -1,17 +1,19 @@
 <?php
 
-class bitPin extends Curl {
+require 'Curl.php';
 
-	public $apiServer = "http://localhost/server/api/v1/";
+class bitPin extends \Curl\Curl {
 
-	public function makeAccount($userId) {
-		$this->post($apiServer . 'makeAccount', array(
+	protected $apiServer = "http://localhost/server/api/v1/";
+
+	public function makeAccount($userId) {die($this->apiServer . 'makeAccount');
+		$this->post($this->apiServer . 'makeAccount', array(
 			'user_id' => $userId
 		));
 	}
 
 	public function getBalance($userId) {
-		$this->post($apiServer . 'getBalance', array(
+		$this->post($this->apiServer . 'getBalance', array(
 			'user_id' => $userId
 		));
 	}

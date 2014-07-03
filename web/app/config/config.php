@@ -13,7 +13,7 @@ return new \Phalcon\Config(array(
         'modelsDir'      => __DIR__ . '/../../app/models/',
         'viewsDir'       => __DIR__ . '/../../app/views/',
         'pluginsDir'     => __DIR__ . '/../../app/plugins/',
-        'libraryDir'     => __DIR__ . '/../../app/library/',
+        'librariesDir'     => __DIR__ . '/../../app/libraries/',
         'cacheDir'       => __DIR__ . '/../../app/cache/',
         'listenersDir'       => __DIR__ . '/../../app/listeners/',
         'formsDir'       => __DIR__ . '/../../app/forms/',
