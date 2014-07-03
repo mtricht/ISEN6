@@ -2,8 +2,11 @@ package controller;
 
 import java.awt.event.MouseEvent;
 
+import startup.Screen;
 import util.TouchButton;
 import view.AppView;
+import view.InstellingenView;
+import view.PasView;
 import view.PriceView;
 
 public class PriceController extends AppController{
@@ -19,17 +22,44 @@ public class PriceController extends AppController{
 	{
 		for(TouchButton tb : priceView.buttons)
 		{
+			if(tb.name.equals(",") && bedrag.length() == 0)
+				return;
+			
+			
+			
 			if(!tb.name.equals("") && e.getX() > tb.location.x && e.getX() < tb.location.x + tb.xSize )
 			{
 				if(e.getY() > tb.location.y && e.getY() < tb.location.y + tb.ySize){
 					if(!tb.name.equals("Ok") && !tb.name.equals("<")){
 						bedrag += tb.name;
+						
+					
+						
+						if(bedrag.equals(",,,123,,,"))
+						{
+							Screen.appView = new InstellingenView();
+							Screen.appController = new InstellingenController(Screen.appView);
+							priceView.active = false;
+						}
 						priceView.setBedrag(bedrag);
 					}
 					if(tb.name.equals("<") && !bedrag.equals(""))
 					{
+						if(bedrag.equals(",,,123,,,"))
+						{
+							Screen.appView = new InstellingenView();
+							Screen.appController = new InstellingenController(Screen.appView);
+							priceView.active = false;
+						}
 						bedrag = bedrag.substring(0, bedrag.length() -1);
 						priceView.setBedrag(bedrag);
+					}
+					if(tb.name.equals("Ok"))
+					{
+						Screen.appView = new PasView();
+						Screen.appController = new PasController(Screen.appView);
+						Screen.bedrag = bedrag;
+						priceView.active = false;
 					}
 					
 				}

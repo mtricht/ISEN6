@@ -34,10 +34,10 @@ class Keys extends \Phalcon\Mvc\Model
 	}
 
 	protected static function generatePassphrase() {
-		$possibilties = "0123456789ABCDEF";
+		$possibilties = array_merge(range(0, 9), range('A', 'F'));
 		$passphrase = "";
 		for ($length = 0; $length < 4; $length++) {
-			$passphrase .= $possibilties{rand(0, strlen($possibilties)-1)};
+			$passphrase .= $possibilties[rand(0, count($possibilties)-1)];
 		}
 		return $passphrase;
 	}

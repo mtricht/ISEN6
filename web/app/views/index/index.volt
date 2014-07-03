@@ -44,7 +44,7 @@
 		        			<img src="img/service-icon/diamond.png" alt="Service 1">
 		        			<h3>Easy to use</h3>
 		        			<p>With easy access to our web and mobile application, nothing can stop you from spending your money.</p>
-		        			{{ link_to('features', 'Read more', 'class': 'btn') }}
+		        			{{ link_to('#', 'Read more', 'class': 'btn') }}
 		        		</div>
 	        		</div>
 	        		<div class="col-md-4 col-sm-6">
@@ -52,7 +52,7 @@
 		        			<img src="img/service-icon/ruler.png" alt="Service 2">
 		        			<h3>Safe & Secure</h3>
 		        			<p>Your bitPin is secured with an RSA certificate so nobody can come between you and our servers.</p>
-		        			{{ link_to('features', 'Read more', 'class': 'btn') }}
+		        			{{ link_to('#', 'Read more', 'class': 'btn') }}
 		        		</div>
 	        		</div>
 	        		<div class="col-md-4 col-sm-6">
@@ -60,7 +60,7 @@
 		        			<img src="img/service-icon/box.png" alt="Service 3">
 		        			<h3>Completely anonymous</h3>
 		        			<p>We will store no information about your transaction history unless you tell us to. Not even the NSA will know what you bought.</p>
-		        			{{ link_to('features', 'Read more', 'class': 'btn') }}
+		        			{{ link_to('#', 'Read more', 'class': 'btn') }}
 		        		</div>
 	        		</div>
 	        	</div>

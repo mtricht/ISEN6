@@ -59,6 +59,8 @@ public class RfidApplet extends Applet implements ActionListener {
     @SuppressWarnings("deprecation")
 	public void setID(String uuid) {
     	this.uuid = uuid;
+    	statusButton.setLabel("Done.");
+    	statusButton.setEnabled(false);
     	// Stop the thread.
     	rfidTool.stop();
     }
