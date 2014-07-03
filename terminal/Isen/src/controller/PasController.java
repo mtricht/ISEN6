@@ -2,8 +2,8 @@ package controller;
 
 import java.awt.event.MouseEvent;
 
-import rfidadapter.RfidReader;
 import startup.Screen;
+import util.RfidReader;
 import util.TouchButton;
 import view.AppView;
 import view.PasView;

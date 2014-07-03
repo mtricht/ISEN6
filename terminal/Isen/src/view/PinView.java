@@ -7,7 +7,7 @@ import java.awt.Point;
 import java.util.Arrays;
 import java.util.List;
 
-import rfidadapter.RfidReader;
+import util.RfidReader;
 import util.TouchButton;
 
 public class PinView extends AppView

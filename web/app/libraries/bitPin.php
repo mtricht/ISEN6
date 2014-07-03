@@ -4,7 +4,7 @@ require 'Curl.php';
 
 class bitPin extends \Curl\Curl {
 
-	protected $apiServer = "http://145.101.89.95:5000/api/v1/";
+	protected $apiServer = "http://localhost/server/api/v1/";
 	protected $apiToken = "SM9fK28Nlg7PoI8cTHREjysHsYBOE42I";
 
 	public function __construct() {

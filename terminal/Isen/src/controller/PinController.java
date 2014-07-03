@@ -20,9 +20,9 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-import rfidadapter.RfidReader;
-import rsa.RSA;
 import startup.Screen;
+import util.RSA;
+import util.RfidReader;
 import util.TouchButton;
 import view.AcceptatieView;
 import view.AppView;
@@ -78,7 +78,6 @@ public class PinController extends AppController{
 
 	private boolean checkPin()
 	{	
-		RSA.loadPrivateKey(RfidReader.privateKey, pin.toCharArray());
-		return false;
+		return RSA.isPassphrase(RfidReader.privateKey, pin.toCharArray());
 	}
 }

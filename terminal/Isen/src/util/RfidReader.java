@@ -1,4 +1,4 @@
-package rfidadapter;
+package util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -16,8 +16,9 @@ import javax.smartcardio.CommandAPDU;
 import javax.smartcardio.ResponseAPDU;
 import javax.smartcardio.TerminalFactory;
 
+import rfidadapter.ACR122UA9Adapter;
+import rfidadapter.RfidAdapter;
 import controller.PasController;
-import sun.misc.BASE64Encoder;
 
 public class RfidReader extends Thread {
 	
@@ -30,8 +31,7 @@ public class RfidReader extends Thread {
 	
 	public void run() {
 		rfidAdapter = new ACR122UA9Adapter();
-		boolean loop = true;
-		while(loop) {
+		while(true) {
             try {
                 TerminalFactory factory = TerminalFactory.getInstance("PC/SC", null);
                 List<CardTerminal> terminals = factory.terminals().list();
@@ -42,7 +42,7 @@ public class RfidReader extends Thread {
                     // Assume there's only one NFC/RFID reader.
                     CardTerminal terminal = terminals.get(0);
                     this.listenCard(terminal);
-                    loop = false;
+                    break;
                 }
             } catch (NoSuchAlgorithmException|CardException|InterruptedException ex) {
                 //System.out.println(ex);
@@ -55,7 +55,7 @@ public class RfidReader extends Thread {
         CommandAPDU command;
         ResponseAPDU response;
         byte[] byteArray;
-        while(!done)
+        while(true)
         {
             terminal.waitForCardPresent(0);
             try {
@@ -107,7 +107,7 @@ public class RfidReader extends Thread {
                 	currentBlock++;
                 }
                 privateKey = message;
-                done = true;
+                break;
             } catch (CardException|ArrayIndexOutOfBoundsException ex) {
                 //ex.printStackTrace();
             }
@@ -117,9 +117,10 @@ public class RfidReader extends Thread {
 				//e.printStackTrace();
 			}
         }
+        pasController.done();
     }
     
-    public static String bytesToHex(byte[] bytes) {
+    public String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
         int v;
         for ( int j = 0; j < bytes.length; j++ ) {

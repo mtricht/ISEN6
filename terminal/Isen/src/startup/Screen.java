@@ -18,7 +18,7 @@ import controller.PriceController;
 
 public class Screen extends Canvas implements Runnable, MouseListener, MouseMotionListener, MouseWheelListener {
 
-	
+	private static final long serialVersionUID = 4504764096520976728L;
 	public static final int 	SCREEN_WIDTH = 320;
 	public static final int 	SCREEN_HEIGHT = 240;
 	public static String bedrag;
