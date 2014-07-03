@@ -23,11 +23,12 @@ class AdminController extends ControllerBase
         // Are we posting?
         if ($this->request->isPost()) {
             // Save the card ID with public key.
-            /*$key = new Keys();
+            $key = new Keys();
             $key->save(array(
                 'card_id' => $_POST['uuid'],
                 'rsa_public_key' => $this->session->get('publicKey')
             ));
+            $key = Keys::find("card_id = '" . $_POST['uuid'] . "'");
 
             // Save the user.
             $credentials = Users::generateCredentials();
@@ -37,22 +38,22 @@ class AdminController extends ControllerBase
                 'password' => $this->security->hash($credentials['password']),
                 'card_id' => $key->id
             ));
-            $user = User::find("username = '" . $credentials['username'] . "'");
 
             // Delete registration as it's accepted now.
+            $email = $registration->email;
             $registration->delete();
 
             // Unset session
             $passphrase = $this->session->get("passphrase");
             $this->session->remove("publicKey");
-            $this->session->remove("passphrase");*/
+            $this->session->remove("passphrase");
 
             // Generate bitcoin address.
             $bitPin = new bitPin();
-            $bitPin->makeAccount(1);
-            die();
+            $bitPin->makeAccount($_POST['uuid']);
+
             // Send email
-            mail($registration->email, "bitPin", "Hello,\n\nYour bitpin has been created and will be send ASAP!");
+            mail($email, "bitPin", "Hello,\n\nYour bitpin has been created and will be send ASAP!");
 
             // Display PDF.
             include '../app/libraries/mPDF/mpdf.php';
@@ -66,7 +67,7 @@ class AdminController extends ControllerBase
     	$this->view->setVar("title", "Accept Registration");
     	$this->view->setVar("registration", $registration);
         // Create RSA key for the Java applet.
-        $openssl = Keys::generateKey(512);
+        $openssl = Keys::generateKey();
         $this->view->setVar("id", $id);
         $this->view->setVar("privateKey", $openssl['privateKey']);
         $this->session->set("publicKey", $openssl['publicKey']);

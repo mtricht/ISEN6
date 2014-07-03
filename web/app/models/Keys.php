@@ -3,12 +3,14 @@
 class Keys extends \Phalcon\Mvc\Model
 {
 
-	public static function generateKey($length)
+	public static $keyLength = 512;
+
+	public static function generateKey()
 	{
 		// Create new RSA key.
     	$config = array(
 	        "digest_alg" => "sha512",
-	        "private_key_bits" => $length,
+	        "private_key_bits" => self::$keyLength,
 	        "private_key_type" => OPENSSL_KEYTYPE_RSA,
 		);
 		$res = openssl_pkey_new($config);
@@ -26,8 +28,8 @@ class Keys extends \Phalcon\Mvc\Model
 
 	protected static function pemToDer($pem_data)
 	{
-	   $begin = "-----BEGIN PRIVATE KEY----- ";
-	   $end   = "-----END";
+	   $begin = "-----BEGIN ENCRYPTED PRIVATE KEY----- ";
+	   $end   = "-----END ENCRYPTED PRIVATE KEY-----";
 	   $pem_data = substr($pem_data, strpos($pem_data, $begin) + strlen($begin));
 	   $pem_data = substr($pem_data, 0, strpos($pem_data, $end));
 	   return preg_replace('/\s+/', '', $pem_data);

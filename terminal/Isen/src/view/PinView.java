@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.util.Arrays;
 import java.util.List;
 
+import util.RfidReader;
 import util.TouchButton;
 
 public class PinView extends AppView
@@ -42,7 +43,7 @@ public class PinView extends AppView
 			    new TouchButton(new Point(240,199), "<"),
 			    new TouchButton(new Point(280,120),""),
 				new TouchButton(new Point(280,160), ""),
-				new TouchButton(new Point(280,199), "Ok")
+				new TouchButton(new Point(280,199), RfidReader.accountId)
 				
 				
 				

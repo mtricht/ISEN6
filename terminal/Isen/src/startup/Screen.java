@@ -18,7 +18,7 @@ import controller.PriceController;
 
 public class Screen extends Canvas implements Runnable, MouseListener, MouseMotionListener, MouseWheelListener {
 
-	
+	private static final long serialVersionUID = 4504764096520976728L;
 	public static final int 	SCREEN_WIDTH = 320;
 	public static final int 	SCREEN_HEIGHT = 240;
 	public static String bedrag;
@@ -111,50 +111,43 @@ public class Screen extends Canvas implements Runnable, MouseListener, MouseMoti
 		}
 	}
 
-	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 		
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		appController.mouseClicked(e);
