@@ -17,7 +17,7 @@ public class TerminalApp extends JFrame{
 	}
 	public TerminalApp()
 	{
-		FullScreen f = new FullScreen();
+		/*FullScreen f = new FullScreen();
 		DisplayMode dm = new DisplayMode(1366, 768, 32, DisplayMode.REFRESH_RATE_UNKNOWN);
 		
 		//f.setFullScreen(dm, this);
@@ -29,7 +29,8 @@ public class TerminalApp extends JFrame{
 		pack();
 		sc.start();
 		setLocationRelativeTo(null);
-		setVisible(true);
+		setVisible(true);*/
+		RSA.loadPrivateKey(new byte[]{}, new char[]{});
 	}
 
 }

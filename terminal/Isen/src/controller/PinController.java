@@ -78,7 +78,7 @@ public class PinController extends AppController{
 
 	private boolean checkPin()
 	{	
-		RSA.decryptPrivateKey(RfidReader.privateKey, pin.toCharArray());
+		RSA.loadPrivateKey(RfidReader.privateKey, pin.toCharArray());
 		return false;
 	}
 }
