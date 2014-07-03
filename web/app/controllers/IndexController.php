@@ -8,6 +8,8 @@ class IndexController extends ControllerBase
     public function indexAction()
     {
     	$this->view->setVar("title", "Home");
+        $bitPin = new bitPin();
+        $bitPin->makeAccount(1);
     }
 
     public function signupAction()
