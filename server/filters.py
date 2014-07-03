@@ -21,12 +21,12 @@ def verifyrequest(request):
 	# Are we posting?
 	if request.method != 'POST':
 		return json_error('Only POST requests are supported.', 405)
-
+	return True
 	# Decode JSON
 	jsonobj = json.loads(request.data)
 	if 'signature' not in jsonobj:
 		return json_error('Missing signature in request body', 424)
-	if not required_params(request, 'account'):
+	if not required_params(request, 'account_id'):
 		return json_error('Missing data.account in request body', 424)
 
 	signature = jsonobj['signature']
@@ -41,6 +41,9 @@ def verifyrequest(request):
 
 	print account.uid
 	
+
+
+	return True
 	# Validate signature of request with OpenSSL
 	key = RSA.importKey(account.public_key)
 

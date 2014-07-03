@@ -11,13 +11,58 @@ def filter():
 	if not isinstance(error, bool):
 		return error
 
-@wallet.route('/', methods=['POST'])
-def index():
-	if not filters.required_params(request, 'account'):
+@wallet.route('/getbalance', methods=['POST'])
+def getbalance():
+	if not filters.required_params(request, 'account_id'):
 		abort(404)
 
 	fields = simplejson.loads(request.data)['data']
 
-	obj = { 'balance': g.bitrpc.getbalance(fields['account']), \
+	obj = { 'balance': g.bitrpc.getbalance(fields['account_id']), \
 			'type': 'bitcoin' }
 	return jsonify(obj)
+
+@wallet.route('/createaddress', methods=['POST'])
+def createadress():
+	if not filters.required_params(request, 'account_id'):
+		abort(404)
+
+	fields = simplejson.loads(request.data)['data']
+
+	obj = { 'address': g.bitrpc.getbalance(fields['account_id']), \
+			'type': 'bitcoin' }
+	return jsonify(obj)
+
+
+@wallet.route('/createtransaction', methods=['POST'])
+def createtransaction():
+	if not filters.required_params(request, 'account_id', 'amount', 'receiving_address'):
+		abort(404)
+
+	fields = simplejson.loads(request.data)['data']
+	try:
+		response = g.bitrpc.sendfrom(fields['account_id'], fields['receiving_address'], fields['amount'])
+	except JSONRPCException, e:
+		return json_error(e.error['message'], 401)
+
+	obj = { 'transaction_id': response, \
+			'type': 'bitcoin' }
+	return jsonify(obj)
+
+@wallet.route('/createaccount', methods=['POST'])
+def createaccount():
+	if not filters.required_params(request, 'account_id'):
+		abort(404)
+
+	fields = simplejson.loads(request.data)['data']
+	try:
+		response = g.bitrpc.getnewaddress(fields['account_id'])
+	except JSONRPCException, e:
+		return json_error(e.error['message'], 401)
+
+	obj = { 'account_id': fields['account_id'], \
+			'address': response, \
+			'type': 'bitcoin' }
+	return jsonify(obj)
+
+
