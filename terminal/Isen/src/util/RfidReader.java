@@ -41,22 +41,25 @@ public class RfidReader extends Thread {
                 } else {
                     // Assume there's only one NFC/RFID reader.
                     CardTerminal terminal = terminals.get(0);
+                    System.out.println("Hebben een terminal.");
                     this.listenCard(terminal);
                     break;
                 }
             } catch (NoSuchAlgorithmException|CardException|InterruptedException ex) {
-                //System.out.println(ex);
+                ex.printStackTrace();
             }
         }
 	}
 
     public void listenCard(CardTerminal terminal) throws CardException {
+        System.out.println("Kaart stuff start.");
         // Keep looping looking for cards until the application is closed
         CommandAPDU command;
         ResponseAPDU response;
         byte[] byteArray;
         while(true)
         {
+            System.out.println("Wachten op kaart.");
             terminal.waitForCardPresent(0);
             try {
                 Card card = terminal.connect("*");
@@ -66,7 +69,7 @@ public class RfidReader extends Thread {
                 response = channel.transmit(command);
                 byteArray = response.getBytes();
                 accountId = ( bytesToHex( byteArray ) );
-
+                System.out.println("AccountID: " + accountId);
                 // How many blocks do we need?
                 command = new CommandAPDU(rfidAdapter.authenticateBlock((byte) 1));
             	response = channel.transmit(command);
@@ -76,7 +79,7 @@ public class RfidReader extends Thread {
                 byteArray = response.getBytes();
                 byte[] number = new byte[]{byteArray[0], byteArray[1], byteArray[2], byteArray[3]};
                 int blocksToRead = ByteBuffer.wrap(number).order(ByteOrder.BIG_ENDIAN).getInt();
-                
+                System.out.println("Blocks to read: " + blocksToRead);
                 // Read private key.
                 byte[] message = null;
                 int currentBlock = 2;
@@ -109,12 +112,12 @@ public class RfidReader extends Thread {
                 privateKey = message;
                 break;
             } catch (CardException|ArrayIndexOutOfBoundsException ex) {
-                //ex.printStackTrace();
+                ex.printStackTrace();
             }
             try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
         }
         pasController.done();
