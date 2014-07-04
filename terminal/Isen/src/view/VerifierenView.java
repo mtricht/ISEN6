@@ -26,6 +26,7 @@ public class VerifierenView extends AppView {
 	{
 		if(active){
 			g.setColor(Color.WHITE);
+			g.setFont(new Font("Monospaced",Font.PLAIN,20));
 			if (done) {
 				for(TouchButton p : buttons)
 				{
@@ -33,7 +34,6 @@ public class VerifierenView extends AppView {
 					g.fillRect(p.location.x, p.location.y, 40, 40);
 					g.setColor(Color.BLUE);
 					g.drawRect(p.location.x, p.location.y, 40, 40);
-					g.setFont(new Font("Monospaced",Font.PLAIN,20));
 					g.drawString(p.name, p.location.x+15, p.location.y+25);
 				}
 				if (succesful) {
