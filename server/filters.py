@@ -31,7 +31,7 @@ def verifyrequest(request):
 
 	# Missing account ID.
 	if not required_params(request, 'account_id'):
-		return json_error('Missing data.account in request body', 424)
+		return json_error('Missing data.account_id in request body', 424)
 
 	uid = jsonobj['data']['account_id']
 	
@@ -53,12 +53,14 @@ def verifyrequest(request):
 	jsonobj.pop('signature')
 
 	# Validate signature of request with OpenSSL
+	if account.public_key is '':
+		return json_error('Missing public key in database.', 424)
 	key = RSA.importKey(account.public_key)
 
 	requesthash = SHA.new()
 	requesthash.update(json.dumps(jsonobj, separators=(',',':')))
 
-	if not PKCS1_v1_5.new(key).verify(requesthash, base64.b64decode(str(signature).translate(string.maketrans('-_.', '+/=')))):
+	if not PKCS1_v1_5.new(key).verify(requesthash, base64.b64decode(signature)): 
 		return json_error('Signature does not match data in body', 401)
 	else:
 		return True

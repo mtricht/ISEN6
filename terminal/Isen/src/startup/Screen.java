@@ -10,7 +10,9 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferStrategy;
+import java.security.PrivateKey;
 
+import properties.ReadProperties;
 import view.AppView;
 import view.PriceView;
 import controller.AppController;
@@ -22,11 +24,15 @@ public class Screen extends Canvas implements Runnable, MouseListener, MouseMoti
 	public static final int 	SCREEN_WIDTH = 320;
 	public static final int 	SCREEN_HEIGHT = 240;
 	public static String bedrag;
+	public static ReadProperties readProperties;
 	
 	private int 				fps;
 	private int					counter;
 	private long 				msStart;
-
+	
+	public static AppView appView;
+	public static AppController appController;
+	public static PrivateKey privateKey;
 
 	public Screen()
 	{
@@ -41,13 +47,13 @@ public class Screen extends Canvas implements Runnable, MouseListener, MouseMoti
 		addMouseMotionListener(this);
 		addMouseWheelListener(this);
 	}
-	public static AppView appView;
-	public static AppController appController;
+	
 	public void start()
 	{
 		Thread thread = new Thread(this);
 		thread.start();
 		
+		readProperties = new ReadProperties();
 		appView = new PriceView();
 		appController = new PriceController(appView);
 	}
@@ -81,11 +87,8 @@ public class Screen extends Canvas implements Runnable, MouseListener, MouseMoti
 		g.setColor(Color.BLACK);
 		g.fillRect(0,  0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		appView.render(g);
-		//level.render(g);
-
-
-			g.setColor(Color.WHITE);
-			g.drawString(Integer.toString(fps), SCREEN_WIDTH-20, 10);
+		g.setColor(Color.WHITE);
+		g.drawString(Integer.toString(fps), SCREEN_WIDTH - 20, 10);
 	}
 
 	public void run()
@@ -94,62 +97,23 @@ public class Screen extends Canvas implements Runnable, MouseListener, MouseMoti
 		{
 			try
 			{
-				//Thread.sleep is niet zo betrouwbaar maar dat maakt in early stages nog niet zo veel uit
 				Thread.sleep(1000/60);
 			}
-			catch(InterruptedException e) {}
-
-			//Altijd logic voor renders doen
+			catch(InterruptedException e) {
+				e.printStackTrace();
+			}
 			update();
-
-
-
-			//** Heb dit helemaal gecomment
-			//if(input.getKeyPressed()) handleInput();
-			//if(input.getKeyReleased()) interruptInput();
-			//input.clear();
 		}
 	}
 
-	public void mouseWheelMoved(MouseWheelEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-		
-	}
-
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void mouseWheelMoved(MouseWheelEvent e) {}
+	public void mouseDragged(MouseEvent e) {}
+	public void mouseMoved(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		appController.mouseClicked(e);
 	}
 

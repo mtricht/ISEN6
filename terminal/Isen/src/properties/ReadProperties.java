@@ -12,29 +12,23 @@ public class ReadProperties {
 	{
 		prop = new Properties();
 		String propFileName = "config.properties";
-		
-		
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
-		  if (inputStream == null) {
-	            try {
-					throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	        }
-		 try {
+		if (inputStream == null) {
+			try {
+				throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		try {
 			prop.load(inputStream);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-       
 	}
 	
-	public String getPropertiesPin()
+	public String getProperty(String name)
 	{
-		return prop.getProperty("propertiesPin");
+		return prop.getProperty(name);
 	}
 }
