@@ -31,7 +31,7 @@ def verifyrequest(request):
 
 	# Missing account ID.
 	if not required_params(request, 'account_id'):
-		return json_error('Missing data.account in request body', 424)
+		return json_error('Missing data.account_id in request body', 424)
 
 	uid = jsonobj['data']['account_id']
 	

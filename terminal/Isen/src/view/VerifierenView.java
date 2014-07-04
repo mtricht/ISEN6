@@ -10,8 +10,11 @@ import java.util.List;
 import util.TouchButton;
 
 public class VerifierenView extends AppView {
+	
 	public List<TouchButton> buttons;
 	public boolean active = true;
+	public boolean done = false;
+	public boolean succesful = false;
 
 	public VerifierenView()
 	{
@@ -24,18 +27,22 @@ public class VerifierenView extends AppView {
 	{
 		if(active){
 			g.setColor(Color.WHITE);
-			for(TouchButton p : buttons)
-			{
+			if (done) {
+				for(TouchButton p : buttons)
+				{
+					g.setColor(Color.WHITE);
+					g.fillRect(p.location.x, p.location.y, 40, 40);
+					g.setColor(Color.BLUE);
+					g.drawRect(p.location.x, p.location.y, 40, 40);
+					g.setFont(new Font("Monospaced",Font.PLAIN,20));
+					g.drawString(p.name, p.location.x+15, p.location.y+25);
+				}
 				g.setColor(Color.WHITE);
-				g.fillRect(p.location.x, p.location.y, 40, 40);
-				g.setColor(Color.BLUE);
-				g.drawRect(p.location.x, p.location.y, 40, 40);
-				g.setFont(new Font("Monospaced",Font.PLAIN,20));
-				g.drawString(p.name, p.location.x+15, p.location.y+25);
+				g.drawString("Succesvol overgemaakt.", 80, 100);
+			} else {
+				g.setColor(Color.WHITE);
+				g.drawString("Verifieren...", 80, 100);
 			}
-			
-			g.setColor(Color.WHITE);
-			g.drawString("Verifieren...", 80, 100);
 		}
 	}
 }

@@ -18,9 +18,12 @@ public class AcceptatieView extends AppView{
 	public AcceptatieView()
 	{
 		buttons = Arrays.asList( 
-				new TouchButton(new Point(0,199),"Nee"),
-				new TouchButton(new Point(160,199),"Ja")
+				new TouchButton(new Point(0, 199),"Nee"),
+				new TouchButton(new Point(160, 199),"Ja")
 				);
+		for (TouchButton b: buttons) {
+			b.xSize = 160;
+		}
 	}
 	
 	public void render(Graphics2D g)

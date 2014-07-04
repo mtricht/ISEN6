@@ -26,7 +26,18 @@ class PanelController extends ControllerBase
         $this->view->setVar('balance', $bitPin->getBalance($key->card_id));
 
         // Transaction history.
-        $this->view->setVar('transactions', $bitPin->getTransactions($key->card_id));
+        $transactions = $bitPin->getTransactions($key->card_id);
+        foreach ($transactions as $transaction) {
+            if ($transaction->otheraccount != '') {
+                $key = Keys::findFirst("card_id = '" . $transaction->otheraccount . "'");
+                if ($key->bitcoin_address != '') {
+                    $transaction->address = $key->bitcoin_address;
+                } else {
+                    $transaction->address = $bitPin->getAddress($transaction->otheraccount);
+                }
+            }
+        }
+        $this->view->setVar('transactions', $transactions);
     }
 
     public function resetAction() {

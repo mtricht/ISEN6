@@ -68,6 +68,11 @@ public class PinController extends AppController{
 
 	private boolean checkPin()
 	{	
-		return RSA.isPassphrase(RfidReader.privateKey, pin.toCharArray());
+		if(RSA.isPassphrase(RfidReader.privateKey, pin.toCharArray())) {
+			Screen.privateKey = RSA.getPrivateKey(RfidReader.privateKey, this.pin.toCharArray());
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
