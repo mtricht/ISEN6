@@ -27,20 +27,24 @@ mysql.init_app(app)
 
 @app.before_request
 def startup():
+	# Setup MySQL connection.
 	g.db = mysql.get_db()
-	g.bitrpc = AuthServiceProxy('http://bitpin:costa212@steamep.com:18332');
+
+	# Setup Bit RPC connection.
+	g.bitrpc = AuthServiceProxy('http://bitpin:costa212@steamep.com:18332')
+
+	# API token for PhalconPHP
+	g.api_token = 'SM9fK28Nlg7PoI8cTHREjysHsYBOE42I'
 
 #Import all used controllers here
 from controllers.wallet import wallet as wallet_controller
-from controllers.transaction import transaction as transaction_controller
-from controllers.dev import dev as development_controller
+#from controllers.dev import dev as development_controller
 
 # Register all controllers (blueprints) over here
 app.register_blueprint(wallet_controller, url_prefix= app.api_url + '/wallet')
-app.register_blueprint(transaction_controller, url_prefix= app.api_url + '/transaction')
 
 # Test development controller for helper functions like generating keypairs
-app.register_blueprint(development_controller, url_prefix= '/dev')
+#app.register_blueprint(development_controller, url_prefix= '/dev')
 
 # Run a tiny webserver when this script is ran directly
 if __name__ == '__main__':

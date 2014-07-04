@@ -3,7 +3,7 @@ from bitcoinrpc.authproxy import JSONRPCException
 import filters, simplejson, flask
 from libraries.jsonh import json_error
 
-wallet = Blueprint('wallet', __name__, template_folder='wat')
+wallet = Blueprint('wallet', __name__)
 
 @wallet.before_request
 def filter():

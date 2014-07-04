@@ -2,9 +2,9 @@
     <div class="container">
     	<div class="row">
 			<h1>Panel</h1>
-			<p>Your current address is: <b>@#$EADSDFFAs</b><br />
-			Balance: 105BT</p>
-			<p><button>Reset Bitcoin address</button></p>
+			<p>Your current address is: <b>{{ bitcoinAddress }}</b><br />
+			Balance: {{ balance }}</p>
+			<p><button class="btn">Reset Bitcoin address</button></p>
 			<p><b>Transaction history</b></p>
 			<table class="table table-striped">
 				<tr>

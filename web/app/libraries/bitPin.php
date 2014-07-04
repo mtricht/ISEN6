@@ -17,7 +17,7 @@ class bitPin extends \Curl\Curl {
 	}
 
 	public function makeAccount($cardId) {
-		$this->post($this->apiServer . 'wallet/createaddress', json_encode(array(
+		$this->post($this->apiServer . 'wallet/createaccount', json_encode(array(
 			'signature' => null,
 			'data' => array(
 				'api_token' => $this->apiToken,
@@ -34,8 +34,8 @@ class bitPin extends \Curl\Curl {
 				'api_token' => $this->apiToken,
 				'account_id' => $cardId
 			)
-		)));
-		return $this->response;
+		)));die(var_Dump($this->response));
+		return $this->response->balance;
 	}
 
 	public function makeTransaction($cardId) {

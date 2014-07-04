@@ -21,29 +21,37 @@ def verifyrequest(request):
 	# Are we posting?
 	if request.method != 'POST':
 		return json_error('Only POST requests are supported.', 405)
-	return True
+
 	# Decode JSON
 	jsonobj = json.loads(request.data)
-	if 'signature' not in jsonobj:
+
+	# Missing signature and not using api token.
+	if 'signature' not in jsonobj and not required_params(request, 'api_token'):
 		return json_error('Missing signature in request body', 424)
+
+	# Missing account ID.
 	if not required_params(request, 'account_id'):
 		return json_error('Missing data.account in request body', 424)
+
+	uid = jsonobj['data']['account_id']
+	
+	# Grab user entry from keys table
+	account = models.findAccount(uid)
+
+	# User does not exist.
+	if account is None:
+		return json_error('Invalid account identifier (field: data.account_id)', 424)
+
+	# If we have an API token and it's correct, don't check the signature.
+	if required_params(request, 'api_token'):
+		if jsonobj['data']['api_token'] == g.api_token:
+			return True
+		else:
+			return json_error('API token is incorrect.', 424)
 
 	signature = jsonobj['signature']
 	jsonobj.pop('signature')
 
-	uid = jsonobj['data']['account']
-	
-	# Grab user entry from keys table
-	account = models.findAccount(uid)
-	if account is None:
-		return json_error('Invalid account identifier (field: data.account)', 424)
-
-	print account.uid
-	
-
-
-	return True
 	# Validate signature of request with OpenSSL
 	key = RSA.importKey(account.public_key)
 

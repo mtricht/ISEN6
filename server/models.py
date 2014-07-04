@@ -7,8 +7,6 @@ def findAccount(account_id):
 	result = db.fetchone()
 	if result is None:
 		return None
-	print("hey ho wat doe je nou die tekeningen zijn niet van jou")
-	print(result[1])
 	return Account(result[0], result[1])
 
 class Account:

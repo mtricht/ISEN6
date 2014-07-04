@@ -7,13 +7,20 @@ class PanelController extends ControllerBase
     public function indexAction()
     {
     	$this->view->setVar("title", "Panel");
-        // Bitcoin address
+
+        // Bitcoin address.
         $this->view->setVar('bitcoinAddress', $this->user->bitcoin_address);
-        // Account balance
 
-        // Transaction history
+        // Lets start talking with the API.
+        $bitPin = new bitPin();
 
-        // Kunnen Overschrijven
+        // What is this users card ID?
+        $key = Keys::findFirst($this->user->card_id);
+
+        // Account balance.
+        $this->view->setVar('balance', $bitPin->getBalance($key->card_id));
+
+        // Transaction history.
 
     }
 }
