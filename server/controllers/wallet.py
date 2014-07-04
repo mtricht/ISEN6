@@ -28,8 +28,13 @@ def createadress():
 		abort(404)
 
 	fields = simplejson.loads(request.data)['data']
+	try:
+		response = g.bitrpc.getnewaddress(fields['account_id'])
+	except JSONRPCException, e:
+		return json_error(e.error['message'], 401)
 
-	obj = { 'address': g.bitrpc.getbalance(fields['account_id']), \
+	obj = { 'account_id': fields['account_id'], \
+			'address': response, \
 			'type': 'bitcoin' }
 	return jsonify(obj)
 
@@ -46,22 +51,6 @@ def createtransaction():
 		return json_error(e.error['message'], 401)
 
 	obj = { 'transaction_id': response, \
-			'type': 'bitcoin' }
-	return jsonify(obj)
-
-@wallet.route('/createaccount', methods=['POST'])
-def createaccount():
-	if not filters.required_params(request, 'account_id'):
-		abort(404)
-
-	fields = simplejson.loads(request.data)['data']
-	try:
-		response = g.bitrpc.getnewaddress(fields['account_id'])
-	except JSONRPCException, e:
-		return json_error(e.error['message'], 401)
-
-	obj = { 'account_id': fields['account_id'], \
-			'address': response, \
 			'type': 'bitcoin' }
 	return jsonify(obj)
 
