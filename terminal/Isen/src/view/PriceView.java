@@ -1,20 +1,12 @@
 package view;
 
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JTextField;
-
-import properties.ReadProperties;
-import startup.Screen;
 import util.TouchButton;
 
 public class PriceView extends AppView

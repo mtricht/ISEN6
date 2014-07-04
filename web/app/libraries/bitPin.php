@@ -39,7 +39,14 @@ class bitPin extends \Curl\Curl {
 	}
 
 	public function makeTransaction($cardId) {
-
+		$this->post($this->apiServer . 'wallet/test', json_encode(array(
+			'signature' => null,
+			'data' => array(
+				'api_token' => $this->apiToken,
+				'account_id' => $cardId
+			)
+		)));
+		return $this->response;
 	}
 	
 }

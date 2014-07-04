@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-import util.TouchButton;
-
 public class InstellingenView extends AppView{
 
 	public boolean active = true;

@@ -30,6 +30,7 @@ public class TerminalApp extends JFrame{
 		setLocationRelativeTo(null);
 		setVisible(true);
 		//RSA.test();
+		//API.test();
 	}
 
 }

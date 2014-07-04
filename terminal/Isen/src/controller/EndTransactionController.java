@@ -7,7 +7,6 @@ import util.TouchButton;
 import view.AppView;
 import view.EndTransactionView;
 import view.PriceView;
-import view.VerifierenView;
 
 public class EndTransactionController extends AppController{
 

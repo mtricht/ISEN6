@@ -7,9 +7,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 public class BetalenView extends JFrame implements ActionListener{
+
+	private static final long serialVersionUID = -2250278509813832874L;
 	JButton one, two, three, four, five,
 		a, b, c, d, e, menu, backspace,
 		accept, empty;

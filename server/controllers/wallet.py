@@ -65,4 +65,6 @@ def createaccount():
 			'type': 'bitcoin' }
 	return jsonify(obj)
 
-
+@wallet.route('/test', methods=['POST'])
+def test():
+	return request.data
