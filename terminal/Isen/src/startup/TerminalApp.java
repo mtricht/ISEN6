@@ -20,7 +20,7 @@ public class TerminalApp extends JFrame {
 		DisplayMode dm = new DisplayMode(320, 240, 16, DisplayMode.REFRESH_RATE_UNKNOWN);
 		
 		f.setFullScreen(dm, this);
-
+		System.out.println(dm.getBitDepth());
 		JPanel panel = new JPanel(new BorderLayout());
 		Screen sc = new Screen();
 		panel.add(sc);
