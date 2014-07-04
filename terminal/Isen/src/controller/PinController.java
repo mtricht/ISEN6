@@ -44,7 +44,15 @@ public class PinController extends AppController{
 							Screen.appController = new AcceptatieController(Screen.appView);
 							pinView.active = false;
 						} else {
-							// TODO: Error weergeven ergens.
+							if (pinView.getTries() == 1) {
+								// This was our last change :(
+								Screen.appView = new PriceView();
+								Screen.appController = new PriceController(Screen.appView);
+							} else {
+								pinView.addTry();
+								pin = "";
+								pinView.setPin(pin);
+							}
 						}
 					}
 					if(tb.name.equals("<-"))
