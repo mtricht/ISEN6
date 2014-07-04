@@ -16,17 +16,6 @@ class bitPin extends \Curl\Curl {
 		));
 	}
 
-	public function makeAccount($cardId) {
-		$this->post($this->apiServer . 'wallet/createaccount', json_encode(array(
-			'signature' => null,
-			'data' => array(
-				'api_token' => $this->apiToken,
-				'account_id' => $cardId
-			)
-		)));
-		return $this->response;
-	}
-
 	public function getBalance($cardId) {
 		$this->post($this->apiServer . 'wallet/getbalance', json_encode(array(
 			'signature' => null,
@@ -34,19 +23,19 @@ class bitPin extends \Curl\Curl {
 				'api_token' => $this->apiToken,
 				'account_id' => $cardId
 			)
-		)));die(var_Dump($this->response));
-		return $this->response->balance;
+		)));
+		return isset($this->response->balance) ? $this->response->balance : 'Error';
 	}
 
-	public function makeTransaction($cardId) {
-		$this->post($this->apiServer . 'wallet/test', json_encode(array(
+	public function getAddress($cardId) {
+		$this->post($this->apiServer . 'wallet/getaddress', json_encode(array(
 			'signature' => null,
 			'data' => array(
 				'api_token' => $this->apiToken,
 				'account_id' => $cardId
 			)
 		)));
-		return $this->response;
+		return isset($this->response->address) ? $this->response->address : 'Error';
 	}
 	
 }
