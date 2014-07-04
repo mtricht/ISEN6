@@ -22,7 +22,8 @@ public class VerifierenController extends AppController{
 		if (to.equals("")) {
 			verifierenView.done = true;
 		} else {
-			API.makeTransaction(to, RfidReader.accountId, Screen.bedrag);
+			verifierenView.succesful = API.makeTransaction(to, RfidReader.accountId, Screen.bedrag);
+			verifierenView.done = true;
 		}
 	}
 	

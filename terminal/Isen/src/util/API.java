@@ -7,7 +7,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import startup.Screen;
 
@@ -32,19 +31,20 @@ public class API {
 		return responseBody;
 	}
 
-	public static void makeTransaction(String to, String from,
+	public static boolean makeTransaction(String to, String from,
 			String bedrag) {
 		// JSON object
 		JSONObject data = new JSONObject();
-		data.put("account_id", "1");
-		data.put("amount", Float.parseFloat("0.00000000000000000001"));
+		data.put("account_id", from);
+		data.put("amount", Float.parseFloat(bedrag.replace(',', '.')));
 		data.put("receiving_address", to);
 		JSONObject json = new JSONObject();
 		json.put("data", data);
-		json.put("signature", RSA.signMessage(Screen.privateKey, data.toString()));
+		json.put("signature", RSA.signMessage(Screen.privateKey, json.toString()));
 		// Send it.
-		JSONObject response = new JSONObject(sendRequest("http://145.101.80.197/server/api/v1/wallet/movetransaction", json));
-		System.out.println(response.get("transaction_id"));
+		String response = sendRequest(Screen.readProperties.getProperty("server") + "/api/v1/wallet/movetransaction", json);
+		JSONObject transaction = new JSONObject(response);
+		return transaction.has("transaction_id");
 	}
 
 }

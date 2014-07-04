@@ -29,7 +29,8 @@ public class RfidReader extends Thread {
 	public RfidAdapter rfidAdapter;
 	private PasController pasController;
 	
-	public void run() {
+	public void run()
+	{
 		rfidAdapter = new ACR122UA9Adapter();
 		while(true) {
             try {
@@ -50,7 +51,8 @@ public class RfidReader extends Thread {
         }
 	}
 
-    public void listenCard(CardTerminal terminal) throws CardException {
+    public void listenCard(CardTerminal terminal) throws CardException
+    {
         // Keep looping looking for cards until the application is closed
         CommandAPDU command;
         ResponseAPDU response;
@@ -120,7 +122,8 @@ public class RfidReader extends Thread {
         pasController.done();
     }
     
-    public String bytesToHex(byte[] bytes) {
+    public String bytesToHex(byte[] bytes)
+    {
         char[] hexChars = new char[bytes.length * 2];
         int v;
         for ( int j = 0; j < bytes.length; j++ ) {

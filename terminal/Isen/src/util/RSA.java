@@ -3,7 +3,6 @@ package util;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
@@ -55,16 +54,10 @@ public class RSA {
 			Signature signal = Signature.getInstance("SHA1withRSA");
 			signal.initSign(privateKey);
 			
-			// Encrypt with SHA1
-			MessageDigest cript = MessageDigest.getInstance("SHA-1");
-			cript.update(message.getBytes("utf8"));
-			
-			byte[] messageArray = cript.digest();
-			
-			signal.update(messageArray);
+			signal.update(message.getBytes());
 
-			return base64Encode(new String(signal.sign()));
-		} catch (InvalidKeyException|NoSuchAlgorithmException|SignatureException|UnsupportedEncodingException e) {
+			return base64Encode(signal.sign());
+		} catch (InvalidKeyException|NoSuchAlgorithmException|SignatureException e) {
 			e.printStackTrace();
 		}
 		
@@ -89,6 +82,17 @@ public class RSA {
 		String response = null;
 		try {
 			response = new String(Base64.decodeBase64(encoded), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
+	public static String base64Encode(byte[] message)
+	{
+		String response = null;
+		try {
+			response = new String(Base64.encodeBase64(message), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

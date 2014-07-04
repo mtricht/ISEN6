@@ -20,7 +20,6 @@ public class VerifierenView extends AppView {
 	{
 		buttons = Arrays.asList( 
 				new TouchButton(new Point(0,0),"Ok"));
-		
 	}
 
 	public void render(Graphics2D g)
@@ -37,8 +36,13 @@ public class VerifierenView extends AppView {
 					g.setFont(new Font("Monospaced",Font.PLAIN,20));
 					g.drawString(p.name, p.location.x+15, p.location.y+25);
 				}
-				g.setColor(Color.WHITE);
-				g.drawString("Succesvol overgemaakt.", 80, 100);
+				if (succesful) {
+					g.setColor(Color.WHITE);
+					g.drawString("Succesvol overgemaakt.", 30, 100);
+				} else {
+					g.setColor(Color.WHITE);
+					g.drawString("Niet genoeg BTC.", 30, 100);
+				}
 			} else {
 				g.setColor(Color.WHITE);
 				g.drawString("Verifieren...", 80, 100);

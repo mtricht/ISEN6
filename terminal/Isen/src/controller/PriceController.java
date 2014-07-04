@@ -2,11 +2,9 @@ package controller;
 
 import java.awt.event.MouseEvent;
 
-import properties.ReadProperties;
 import startup.Screen;
 import util.TouchButton;
 import view.AppView;
-import view.InstellingenView;
 import view.PasView;
 import view.PriceView;
 
@@ -14,12 +12,10 @@ public class PriceController extends AppController {
 
 	PriceView priceView;
 	public String bedrag = new String();
-	public String secret;
 	
 	public PriceController(AppView appView)
 	{
 		priceView = (PriceView) appView;
-		this.secret = Screen.readProperties.getProperty("secret");
 	}
 
 	public void mouseClicked(MouseEvent e) 
@@ -33,22 +29,10 @@ public class PriceController extends AppController {
 				if(e.getY() > tb.location.y && e.getY() < tb.location.y + tb.ySize){
 					if(!tb.name.equals("Ok") && !tb.name.equals("<")){
 						bedrag += tb.name;
-						if(bedrag.equals(secret))
-						{
-							Screen.appView = new InstellingenView();
-							Screen.appController = new InstellingenController(Screen.appView);
-							priceView.active = false;
-						}
 						priceView.setBedrag(bedrag);
 					}
 					if(tb.name.equals("<") && !bedrag.equals(""))
 					{
-						if(bedrag.equals(",,,123,,,"))
-						{
-							Screen.appView = new InstellingenView();
-							Screen.appController = new InstellingenController(Screen.appView);
-							priceView.active = false;
-						}
 						bedrag = bedrag.substring(0, bedrag.length() -1);
 						priceView.setBedrag(bedrag);
 					}

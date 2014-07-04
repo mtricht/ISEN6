@@ -13,17 +13,17 @@ import java.awt.image.BufferStrategy;
 import java.security.PrivateKey;
 
 import properties.ReadProperties;
-import view.AcceptatieView;
 import view.AppView;
-import controller.AcceptatieController;
+import view.PriceView;
 import controller.AppController;
+import controller.PriceController;
 
 public class Screen extends Canvas implements Runnable, MouseListener, MouseMotionListener, MouseWheelListener {
 
 	private static final long serialVersionUID = 4504764096520976728L;
 	public static final int 	SCREEN_WIDTH = 320;
 	public static final int 	SCREEN_HEIGHT = 240;
-	public static String bedrag = "5";
+	public static String bedrag;
 	public static ReadProperties readProperties;
 	
 	private int 				fps;
@@ -53,9 +53,9 @@ public class Screen extends Canvas implements Runnable, MouseListener, MouseMoti
 		Thread thread = new Thread(this);
 		thread.start();
 		
-		appView = new AcceptatieView();
-		appController = new AcceptatieController(appView);
 		readProperties = new ReadProperties();
+		appView = new PriceView();
+		appController = new PriceController(appView);
 	}
 
 	public void update()

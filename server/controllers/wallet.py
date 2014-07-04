@@ -61,7 +61,10 @@ def movetransaction():
 
 	fields = simplejson.loads(request.data)['data']
 	try:
-		response = g.bitrpc.move(fields['account_id'], fields['receiving_address'], fields['amount'])
+		if (float(g.bitrpc.getbalance(fields['account_id'])) - float(fields['amount'])) >= 0:
+			response = g.bitrpc.move(fields['account_id'], fields['receiving_address'], fields['amount'])
+		else:
+			return json_error('Not enough funds', 401)
 	except JSONRPCException, e:
 		return json_error(e.error['message'], 401)
 

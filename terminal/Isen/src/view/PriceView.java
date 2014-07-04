@@ -31,22 +31,18 @@ public class PriceView extends AppView
 				new TouchButton(new Point(160,160), "3"),
 				new TouchButton(new Point(160,199), "9"),
 				new TouchButton(new Point(200,160), "4"),
-				new TouchButton(new Point(200,199), ","),
 			    new TouchButton(new Point(240,160), "5"),
+				new TouchButton(new Point(200,199), ","),
 			    new TouchButton(new Point(240,199), "<"),
 				new TouchButton(new Point(280,160), ""),
 				new TouchButton(new Point(280,199), "Ok")
-				
-				
 		);
 		s = "Bedrag Invoeren";
-
 	}
 	
 	public void render(Graphics2D g)
 	{
 		if(active){
-			//Screen.appView = new derpview();
 			g.setColor(Color.WHITE);
 			for(TouchButton p : buttons)
 			{
@@ -57,14 +53,10 @@ public class PriceView extends AppView
 				g.setFont(new Font("Monospaced",Font.PLAIN,20));
 				g.drawString(p.name, p.location.x+15, p.location.y+25);
 			}
-			
 			g.setColor(Color.WHITE);
 			g.drawString(bedrag, 100, 100);
 			g.drawString(s, 90, 80);
 			g.setColor(Color.BLUE);
-	
-			//active = !active;
-			 
 		}
 		
 	}
@@ -73,7 +65,4 @@ public class PriceView extends AppView
 	{
 		this.bedrag = bedrag;
 	}
-
 }
-	
-
