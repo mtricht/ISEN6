@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 import view.FullScreen;
 
-public class TerminalApp extends JFrame{
+public class TerminalApp {
 	
 	private static final long serialVersionUID = 2502662043151826952L;
 	public static void main(String[] args) {
@@ -36,7 +36,7 @@ public class TerminalApp extends JFrame{
             }
         }
 	}
-	public TerminalApp()
+	/*public TerminalApp()
 	{
 		FullScreen f = new FullScreen();
 		DisplayMode dm = new DisplayMode(1366, 768, 32, DisplayMode.REFRESH_RATE_UNKNOWN);
@@ -53,6 +53,6 @@ public class TerminalApp extends JFrame{
 		setVisible(true);
 		//RSA.test();
 		//API.test();
-	}
+	}*/
 
 }
