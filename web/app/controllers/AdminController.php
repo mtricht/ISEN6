@@ -48,10 +48,6 @@ class AdminController extends ControllerBase
             $this->session->remove("publicKey");
             $this->session->remove("passphrase");
 
-            // Generate bitcoin address.
-            $bitPin = new bitPin();
-            $bitPin->makeAccount($_POST['uuid']);
-
             // Send email
             mail($email, "bitPin", "Hello,\n\nYour bitpin has been created and will be send ASAP!");
 
