@@ -2,7 +2,7 @@
 
 class PanelController extends ControllerBase
 {
-    public $exceptions = array('index');
+    public $exceptions = array();
 
     public function indexAction()
     {
@@ -13,7 +13,8 @@ class PanelController extends ControllerBase
 
         // What is this users card ID?
         $key = Keys::findFirst($this->user->card_id);
-$key->card_id = "peter";
+        $key->card_id = "1";
+
         // Bitcoin address.
         $this->view->setVar('bitcoinAddress', $bitPin->getAddress($key->card_id));
 
@@ -21,6 +22,8 @@ $key->card_id = "peter";
         $this->view->setVar('balance', $bitPin->getBalance($key->card_id));
 
         // Transaction history.
-
+        $this->view->setVar('transactions', $bitPin->getTransactions($key->card_id));
     }
+
+    //public function resetAction
 }

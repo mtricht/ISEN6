@@ -5,7 +5,7 @@ use Phalcon\Http\Response;
 class AdminController extends ControllerBase
 {
 
-    public $exceptions = array('index', 'accept');
+    public $exceptions = array();
 
     public function indexAction()
     {

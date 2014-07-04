@@ -37,5 +37,16 @@ class bitPin extends \Curl\Curl {
 		)));
 		return isset($this->response->address) ? $this->response->address : 'Error';
 	}
+
+	public function getTransactions($cardId) {
+		$this->post($this->apiServer . 'wallet/getreceived', json_encode(array(
+			'signature' => null,
+			'data' => array(
+				'api_token' => $this->apiToken,
+				'account_id' => $cardId
+			)
+		)));die(var_dump($this->response));
+		return isset($this->response->wtf_is_dit) ? $this->response->wtf_is_dit : 'Error';
+	}
 	
 }

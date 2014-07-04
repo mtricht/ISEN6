@@ -3,7 +3,7 @@
     	<div class="row">
 			<h1>Panel</h1>
 			<p>Your current address is: <b>{{ bitcoinAddress }}</b><br />
-			Balance: {{ balance }}</p>
+			Balance: {{ balance }} BTC</p>
 			<p><button class="btn">Reset Bitcoin address</button></p>
 			<p><b>Transaction history</b></p>
 			<table class="table table-striped">
