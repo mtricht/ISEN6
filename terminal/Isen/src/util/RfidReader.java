@@ -45,7 +45,7 @@ public class RfidReader extends Thread {
                     break;
                 }
             } catch (NoSuchAlgorithmException|CardException|InterruptedException ex) {
-                //System.out.println(ex);
+                ex.printStackTrace();
             }
         }
 	}
@@ -76,7 +76,7 @@ public class RfidReader extends Thread {
                 byteArray = response.getBytes();
                 byte[] number = new byte[]{byteArray[0], byteArray[1], byteArray[2], byteArray[3]};
                 int blocksToRead = ByteBuffer.wrap(number).order(ByteOrder.BIG_ENDIAN).getInt();
-                
+
                 // Read private key.
                 byte[] message = null;
                 int currentBlock = 2;
@@ -109,12 +109,12 @@ public class RfidReader extends Thread {
                 privateKey = message;
                 break;
             } catch (CardException|ArrayIndexOutOfBoundsException ex) {
-                //ex.printStackTrace();
+                ex.printStackTrace();
             }
             try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
         }
         pasController.done();

@@ -7,7 +7,6 @@ import java.awt.Point;
 import java.util.Arrays;
 import java.util.List;
 
-import util.RfidReader;
 import util.TouchButton;
 
 public class PinView extends AppView
@@ -15,6 +14,7 @@ public class PinView extends AppView
 	public List<TouchButton> buttons;
 	public boolean active = true;
 	String pin = "";
+	int tries = 3;
 
 	public PinView()
 	{
@@ -43,10 +43,7 @@ public class PinView extends AppView
 			    new TouchButton(new Point(240,199), "<"),
 			    new TouchButton(new Point(280,120),""),
 				new TouchButton(new Point(280,160), ""),
-				new TouchButton(new Point(280,199), RfidReader.accountId)
-				
-				
-				
+				new TouchButton(new Point(280,199), "Ok")				
 		);
 	}
 	public void render(Graphics2D g)
@@ -64,22 +61,32 @@ public class PinView extends AppView
 			}
 			
 			g.setColor(Color.WHITE);
-			g.drawString("Pin:", 90, 80);
+				g.drawString("Pin:", 90, 80);
+			if (tries < 3) {
+				g.drawString("Verkeerde pin.", 90, 40);
+				g.drawString("Nog " + tries + " poging" + ((tries>1) ? "en" : "") + ".", 90, 60);
+			}
 			g.setColor(Color.WHITE);
 			
 			String sicrit = "";
 			for(int x=0; x<pin.length(); x++)
 				sicrit += "X";
 			g.drawString(sicrit, 150, 80);
-			
-	
-			//active = !active;
-			 
 		}
 	}
 	
 	public void setPin(String pin)
 	{
 		this.pin = pin;
+	}
+	
+	public void addTry()
+	{
+		this.tries--;
+	}
+	
+	public int getTries()
+	{
+		return tries;
 	}
 }

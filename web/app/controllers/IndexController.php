@@ -8,6 +8,7 @@ class IndexController extends ControllerBase
     public function indexAction()
     {
     	$this->view->setVar("title", "Home");
+        die(Var_Dump(Keys::generateKey()));
     }
 
     public function signupAction()
