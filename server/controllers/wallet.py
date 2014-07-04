@@ -7,12 +7,18 @@ wallet = Blueprint('wallet', __name__)
 
 @wallet.before_request
 def filter():
+	""" Filters every request to make sure the request is authorized and correctly implemented """
+	# error is a JSONResponse when failed, True when succeeded
 	error = filters.verifyrequest(request)
 	if not isinstance(error, bool):
 		return error
 
 @wallet.route('/getbalance', methods=['POST'])
 def getbalance():
+	""" Get the current balance for a given bitcoind account
+
+	JSON Parameters: data.account_id -- the account_id of the account you want the balance of (required).
+	"""
 	if not filters.required_params(request, 'account_id'):
 		abort(404)
 
@@ -25,6 +31,10 @@ def getbalance():
 
 @wallet.route('/getaddress', methods=['POST'])
 def getaddress():
+	""" Get the currently used address for a given bitcoind account
+
+	JSON Parameters: data.account_id -- the account_id of the account you want the address of (required).
+	"""
 	if not filters.required_params(request, 'account_id'):
 		abort(404)
 
@@ -41,6 +51,12 @@ def getaddress():
 
 @wallet.route('/createtransaction', methods=['POST'])
 def createtransaction():
+	""" Create a new transaction of funds from a bitcoind account to a bitcoin address
+
+	JSON Parameters: data.account_id 		-- the account_id of the account you want to transfer funds from (required).
+					 data.amount     		-- the amount of BTC to transfer (required).
+					 data.receiving_address -- the receiving bitcoin address (required).
+	"""
 	if not filters.required_params(request, 'account_id', 'amount', 'receiving_address'):
 		abort(404)
 
@@ -56,6 +72,10 @@ def createtransaction():
 
 @wallet.route('/getreceived', methods=['POST'])
 def getreceived():
+	""" Get all transactions that have been made by and to a bitcoind account
+	
+	JSON Parameters: data.account_id -- the account_id of the account you want the transactions of (required).
+	"""
 	if not filters.required_params(request, 'account_id'):
 		abort(404)
 
@@ -71,6 +91,10 @@ def getreceived():
 
 @wallet.route('/resetaddress', methods=['POST'])
 def resetaddress():
+	""" Create a new bitcoin address for a bitcoind account
+
+	JSON Parameters: data.account_id -- the account_id of the account you want a new bitcoin address for (required).
+	"""
 	if not filters.required_params(request, 'account_id'):
 		abort(404)
 
