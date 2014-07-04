@@ -17,7 +17,7 @@ public class TerminalApp extends JFrame {
 	public TerminalApp()
 	{
 		FullScreen f = new FullScreen();
-		DisplayMode dm = new DisplayMode(1366, 768, 32, DisplayMode.REFRESH_RATE_UNKNOWN);
+		DisplayMode dm = new DisplayMode(1366, 768, 16, DisplayMode.REFRESH_RATE_UNKNOWN);
 		
 		f.setFullScreen(dm, this);
 
