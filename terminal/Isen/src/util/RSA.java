@@ -1,9 +1,11 @@
 package util;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
@@ -16,6 +18,8 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.ssl.PKCS8Key;
 
 import sun.misc.BASE64Decoder;
@@ -56,12 +60,16 @@ public class RSA {
 			Signature signal = Signature.getInstance("SHA1withRSA");
 			signal.initSign(privateKey);
 			
-			byte[] messageArray = message.getBytes(Charset.forName("UTF-8"));
+			// Encrypt with SHA1
+			MessageDigest cript = MessageDigest.getInstance("SHA-1");
+			cript.update(message.getBytes("utf8"));
+			
+			byte[] messageArray = cript.digest();
 			
 			signal.update(messageArray);
 
-			return new String(signal.sign());
-		} catch (InvalidKeyException|NoSuchAlgorithmException|SignatureException e) {
+			return base64Encode(new String(signal.sign()));
+		} catch (InvalidKeyException|NoSuchAlgorithmException|SignatureException|UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		
@@ -81,6 +89,28 @@ public class RSA {
 		return "Error.";
 	}
 	
+	public static String base64Decode(String encoded)
+	{
+		String response = null;
+		try {
+			response = new String(Base64.decodeBase64(encoded), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
+	public static String base64Encode(String message)
+	{
+		String response = null;
+		try {
+			response = new String(Base64.encodeBase64(message.getBytes()), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
 	public static void test()
 	{
 		String privKey = "MIIBpjBABgkqhkiG9w0BBQ0wMzAbBgkqhkiG9w0BBQwwDgQI6c/Gyck+j7oCAggAMBQGCCqGSIb3DQMHBAjqwPpvKHFfqASCAWAOBLmTAD0LE4xfCvtnnVhv1DU2XHw3JGABiznBh/lpmnH0ffo1CNPb8YR/24nKr4isOj7SMnQG0/TMipXIFOupWIcXJrrzXn6QcZMxRA+gAIkSKFgXltM54tiFyzbxYHwb+20NnMX5bSJpFPZvAJOoTDxrvVGDpLV2K+xEqHavR1E/P7wCkX+J7yRAx193yiLfbFXMbvecEb5D7ywftS/jc8IwbgFOk7Jrqv92HILtDxZ3GX2TI90LuZE7gSdTGxVA0WpfEckxP/pVLyzOBUOW2M64XQBvhTV07Vr5ZWhRz60M+CnBNIUDqBhlJw/Chi/Gm7y4ac0nmJfiNxeQ7KXb1ANo/z2K6yKluR8P9dGWmsFw9RbFAIHmkksxVLfUjdVwUWMlIJMznJ5wrHGLBXmAKbowUeUzGB1SeixzGDZ/GX+42m450solDdiYKjtbXiNZgas1J4x9lKyeDYGloqhd";
@@ -93,8 +123,8 @@ public class RSA {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        signMessage(getPrivateKey(encryptedPrivateKey, passphrase), "Test");
-        //isPassphrase(encryptedPrivateKey, passphrase);
+        System.out.println(signMessage(getPrivateKey(encryptedPrivateKey, passphrase), "Test"));
+        System.out.println(isPassphrase(encryptedPrivateKey, passphrase));
 	}
 
 }
