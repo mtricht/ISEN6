@@ -8,11 +8,11 @@ class PanelController extends ControllerBase
     {
     	$this->view->setVar("title", "Panel");
 
-        // Bitcoin address.
-        $this->view->setVar('bitcoinAddress', $this->user->bitcoin_address);
-
         // Lets start talking with the API.
         $bitPin = new bitPin();
+
+        // Bitcoin address.
+        $this->view->setVar('bitcoinAddress', $bitPin->getAddress($key->card_id));
 
         // What is this users card ID?
         $key = Keys::findFirst($this->user->card_id);

@@ -38,15 +38,15 @@ class bitPin extends \Curl\Curl {
 		return $this->response->balance;
 	}
 
-	public function makeTransaction($cardId) {
-		$this->post($this->apiServer . 'wallet/test', json_encode(array(
+	public function getAddress($cardId) {
+		$this->post($this->apiServer . 'wallet/getaddress', json_encode(array(
 			'signature' => null,
 			'data' => array(
 				'api_token' => $this->apiToken,
 				'account_id' => $cardId
 			)
 		)));
-		return $this->response;
+		return $this->response->address;
 	}
 	
 }
