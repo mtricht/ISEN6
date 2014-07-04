@@ -54,6 +54,22 @@ def createtransaction():
 			'type': 'bitcoin' }
 	return jsonify(obj)
 
+@wallet.route('/getreceived', methods=['POST'])
+def getreceived():
+	if not filters.required_params(request, 'account_id'):
+		abort(404)
+
+	fields = simplejson.loads(request.data)['data']
+	try:
+		response = g.bitrpc.listreceivedbyaccount(fields['account_id'])
+	except JSONRPCException, e:
+		return json_error(e.error['message'], 401)
+
+	obj = { 'wtf_is_dit': response, \
+			'type': 'bitcoin' }
+	return jsonify(obj)
+
+
 @wallet.route('/test', methods=['POST'])
 def test():
 	return request.data
