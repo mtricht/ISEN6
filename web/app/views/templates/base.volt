@@ -29,6 +29,9 @@
 
 	   	{% include "partials/footer.volt" %}
 
+        <script type="text/javascript">
+            var baseUrl = "{{ url('') }}";
+        </script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         {{ javascript_include('js/jquery/jquery.fitvids.js') }}
 		{{ javascript_include('js/jquery/jquery.sequence-min.js') }}

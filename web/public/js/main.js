@@ -1,3 +1,7 @@
+function redirect (url) {
+	window.location.href = baseUrl + url
+}
+
 $(document).ready(function(){
 	// Accept button for a new user.
 	$('#AcceptButton').click(function(e){
@@ -7,5 +11,10 @@ $(document).ready(function(){
 		} else {
 			$('#RfidUUID').val(RfidApplet.uuid);
 		}
+	});
+	$('#AcceptForm').submit(function(){
+		// Open PDF in new window.
+		setTimeout(function(){redirect('admin');}, 500);
+		$(this).attr('target', '_blank');
 	});
 });
