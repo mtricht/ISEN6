@@ -22,6 +22,7 @@ def getbalance():
 	if not filters.required_params(request, 'account_id'):
 		abort(404)
 
+	# Load the request fields from the json query string
 	fields = simplejson.loads(request.data)['data']
 
 	obj = { 'balance': g.bitrpc.getbalance(fields['account_id']), \
@@ -38,6 +39,7 @@ def getaddress():
 	if not filters.required_params(request, 'account_id'):
 		abort(404)
 
+	# Load the request fields from the json query string
 	fields = simplejson.loads(request.data)['data']
 	try:
 		response = g.bitrpc.getaccountaddress(fields['account_id'])
@@ -60,6 +62,7 @@ def createtransaction():
 	if not filters.required_params(request, 'account_id', 'amount', 'receiving_address'):
 		abort(404)
 
+	# Load the request fields from the json query string
 	fields = simplejson.loads(request.data)['data']
 	try:
 		response = g.bitrpc.sendfrom(fields['account_id'], fields['receiving_address'], fields['amount'])
@@ -79,6 +82,7 @@ def getreceived():
 	if not filters.required_params(request, 'account_id'):
 		abort(404)
 
+	# Load the request fields from the json query string
 	fields = simplejson.loads(request.data)['data']
 	try:
 		response = g.bitrpc.listtransactions(fields['account_id'])
@@ -98,6 +102,7 @@ def resetaddress():
 	if not filters.required_params(request, 'account_id'):
 		abort(404)
 
+	# Load the request fields from the json query string
 	fields = simplejson.loads(request.data)['data']
 	try:
 		response = g.bitrpc.getnewaddress(fields['account_id'])
