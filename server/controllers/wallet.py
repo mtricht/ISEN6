@@ -61,14 +61,29 @@ def getreceived():
 
 	fields = simplejson.loads(request.data)['data']
 	try:
-		response = g.bitrpc.listreceivedbyaccount(fields['account_id'])
+		response = g.bitrpc.listtransactions(fields['account_id'])
 	except JSONRPCException, e:
 		return json_error(e.error['message'], 401)
 
-	obj = { 'wtf_is_dit': response, \
+	obj = { 'transactions': response, \
 			'type': 'bitcoin' }
 	return jsonify(obj)
 
+@wallet.route('/resetaddress', methods=['POST'])
+def resetaddress():
+	if not filters.required_params(request, 'account_id'):
+		abort(404)
+
+	fields = simplejson.loads(request.data)['data']
+	try:
+		response = g.bitrpc.getnewaddress(fields['account_id'])
+	except JSONRPCException, e:
+		return json_error(e.error['message'], 401)
+
+	obj = { 'account_id': fields['account_id'], \
+			'address': response, \
+			'type': 'bitcoin' }
+	return jsonify(obj)
 
 @wallet.route('/test', methods=['POST'])
 def test():

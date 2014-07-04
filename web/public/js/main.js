@@ -17,4 +17,7 @@ $(document).ready(function(){
 		setTimeout(function(){redirect('admin');}, 500);
 		$(this).attr('target', '_blank');
 	});
+	$('#ResetAddress').click(function(){
+		redirect('panel/reset');
+	})
 });

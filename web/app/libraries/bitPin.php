@@ -45,8 +45,19 @@ class bitPin extends \Curl\Curl {
 				'api_token' => $this->apiToken,
 				'account_id' => $cardId
 			)
-		)));die(var_dump($this->response));
-		return isset($this->response->wtf_is_dit) ? $this->response->wtf_is_dit : 'Error';
+		)));
+		return isset($this->response->transactions) ? $this->response->transactions : 'Error';
+	}
+
+	public function resetAddress($cardId) {
+		$this->post($this->apiServer . 'wallet/resetaddress', json_encode(array(
+			'signature' => null,
+			'data' => array(
+				'api_token' => $this->apiToken,
+				'account_id' => $cardId
+			)
+		)));
+		return isset($this->response->address) ? $this->response->address : 'Error';
 	}
 	
 }
